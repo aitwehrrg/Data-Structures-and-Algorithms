@@ -9,7 +9,6 @@ struct ListNode {
 };
 
 class Stack {
-    ListNode* head;
     ListNode* top;
 
     public:
