@@ -25,12 +25,11 @@ class Queue {
 
 void Queue::enqueue(int data) {
     ListNode* newNode = new ListNode(data);
-    if (isEmpty()) {
-        front = rear = newNode;
-    } else {
+    if (isEmpty())
+        front = newNode;
+    else
         rear -> next = newNode;
-        rear = newNode;
-    }
+    rear = newNode;
 }
 
 int Queue::dequeue() {
@@ -45,9 +44,7 @@ int Queue::dequeue() {
     front = front -> next;
     delete temp;
 
-    if (front == nullptr) {
-        rear = nullptr;
-    }
+    if (front == nullptr) rear = nullptr;
     return data;
 }
 
