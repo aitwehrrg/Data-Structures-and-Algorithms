@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX 5
+#define MAX 1000
 class Queue {
     int front,rear;
     unsigned int sizeVar;
@@ -39,14 +39,14 @@ int Queue::dequeue() {
     }
 
     cerr << "Queue Underflow." << endl;
-    return 0;
+    return -1;
 }
 
 int Queue::peek() {
     if (!isEmpty())
         return queue[inc(front)];
     cerr << "Queue Underflow." << endl;
-    return 0;
+    return -1;
 }
 
 inline unsigned int Queue::size() { return sizeVar; }

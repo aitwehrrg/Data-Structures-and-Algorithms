@@ -33,7 +33,7 @@ int Stack::pop() {
         return stack[top--];
 
     cerr << "Stack Underflow." << endl;
-    return 0;
+    return -1;
 }
 
 int Stack::peek() {
@@ -41,7 +41,7 @@ int Stack::peek() {
         return stack[top];
 
     cerr << "Stack Underflow." << endl;
-    return 0;
+    return -1;
 }
 
 inline unsigned int Stack::size() { return top + 1; }

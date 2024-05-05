@@ -9,11 +9,10 @@ struct ListNode {
 };
 
 class Stack {
-    ListNode* head;
     ListNode* top;
 
     public:
-    Stack(): head(nullptr), top(nullptr) {}
+    Stack(): top(nullptr) {}
     void push(int);
     int pop();
     int peek();
