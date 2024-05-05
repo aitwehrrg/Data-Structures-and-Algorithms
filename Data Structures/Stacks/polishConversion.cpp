@@ -70,14 +70,3 @@ string infixToPrefix(string infix) {
     reverse(result.begin(), result.end());    
     return result;
 }
-
-int main() {
-    string infix, postfix, prefix;
-    cout << "Enter infix expression: "; getline(cin, infix);
-    postfix = infixToPostfix(infix);
-    cout << "Postfix: " << postfix << endl;
-
-    prefix = infixToPrefix(infix);
-    cout << "Prefix: " << prefix << endl;
-    return 0;
-}

@@ -128,20 +128,3 @@ float Polish::infix(string expression) {
     }
     return postfix(post);
 }
-
-
-int main() {
-    Polish polish;
-    string expression;
-    
-    cout << "Enter prefix expression: "; getline(cin,expression);
-    cout << "Result: "<<polish.prefix(expression) << endl;
-
-    cout << "Enter postfix expression: "; getline(cin,expression);
-    cout << "Result: "<<polish.postfix(expression) << endl;
-
-    cout << "Enter infix expression: "; getline(cin,expression);
-    cout << "Result: "<<polish.infix(expression) << endl;
-    
-    return 0;
-}
