@@ -10,13 +10,14 @@ class Graph {
     vector<Vertex*> vertices;
     vector<list<Vertex*>> adjacencyList;
     void dfsHelper(unsigned int, vector<bool>&);
+    void bfsHelper(unsigned int, vector<bool>&);
 
     public:
     void addVertex(Vertex*);
     inline void addEdge(unsigned int, unsigned int);
     inline bool checkEdge(unsigned int, unsigned int);
     void dfs(unsigned int);
-    // void bfs();
+    void bfs(unsigned int);
     void display();
 };
 
@@ -50,13 +51,37 @@ void Graph::dfsHelper(unsigned int src, vector<bool>& visited) {
     visited[src] = true;
     cout << vertices[src] -> data << " -> ";
 
-    for (int i = 0; i < adjacencyList.size(); i++)
+    for (int i = 0; i < vertices.size(); i++)
         if (checkEdge(src, i))
             dfsHelper(i, visited);
 }
 
+void Graph::bfs(unsigned int src) {
+    vector<bool> visited(vertices.size());
+    cout << "[";
+    bfsHelper(src, visited);
+    cout << "null]" << endl;
+}
+
+void Graph::bfsHelper(unsigned int src, vector<bool>& visited) {
+    queue<unsigned int> q;
+
+    q.push(src);
+    visited[src] = true;
+
+    while (!q.empty()) {
+        src = q.front(); q.pop();
+        cout << vertices[src] -> data << " -> ";
+        for (int i = 0; i < vertices.size(); i++)
+            if (checkEdge(src, i) && !visited[i]) {
+                q.push(i);
+                visited[i] = true;
+            }
+    }
+}
+
 void Graph::display() {
-    for (int i = 0; i < adjacencyList.size(); i++) {
+    for (int i = 0; i < vertices.size(); i++) {
         cout << vertices[i] -> data << " -> ";
         for (Vertex* vertex : adjacencyList[i])
             cout << vertex -> data << " -> ";
