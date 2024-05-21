@@ -43,9 +43,7 @@ template <typename T> T Queue<T>::dequeue() {
     front = front -> next;
     delete temp;
 
-    if (front == nullptr) {
-        rear = nullptr;
-    }
+    if (front == nullptr) rear = nullptr;
     return data;
 }
 
