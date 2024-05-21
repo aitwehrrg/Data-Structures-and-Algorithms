@@ -1,26 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX 1000
-class Stack {
-    int stack[MAX];
+template <typename T, unsigned int MAX> class Stack {
+    T stack[MAX];
     int top;
 
     public:
-    Stack(): top(-1) {}
-    bool push(int);
-    int pop();
-    int peek();
+    Stack<T, MAX>(): top(-1) {}
+    bool push(T);
+    T pop();
+    T peek();
     inline unsigned int size();
     inline bool isFull();
     inline bool isEmpty();
-    bool contains(int);
     void display();
 };
 
-bool Stack::push(int data) {
+template <typename T, unsigned int MAX> bool Stack<T, MAX>::push(T data) {
     if(isFull()) {
-        cerr << "Stack Overflow." << endl;
+        cerr << "Stack<T, MAX> Overflow." << endl;
         return false;
     }
 
@@ -28,36 +26,29 @@ bool Stack::push(int data) {
     return true;
 }
 
-int Stack::pop() {
+template <typename T, unsigned int MAX> T Stack<T, MAX>::pop() {
     if (!isEmpty())
         return stack[top--];
 
     cerr << "Stack Underflow." << endl;
-    return -1;
+    return T{};
 }
 
-int Stack::peek() {
+template <typename T, unsigned int MAX> T Stack<T, MAX>::peek() {
     if (!isEmpty())
         return stack[top];
 
     cerr << "Stack Underflow." << endl;
-    return -1;
+    return T{};
 }
 
-inline unsigned int Stack::size() { return top + 1; }
+template <typename T, unsigned int MAX> inline unsigned int Stack<T, MAX>::size() { return top + 1; }
 
-inline bool Stack::isFull() { return size() == MAX; }
+template <typename T, unsigned int MAX> inline bool Stack<T, MAX>::isFull() { return size() == MAX; }
 
-inline bool Stack::isEmpty() { return !size(); }
+template <typename T, unsigned int MAX> inline bool Stack<T, MAX>::isEmpty() { return !size(); }
 
-bool Stack::contains(int data) {
-    for(int i = 0; i < size(); i++)
-        if(stack[i] == data)
-            return true;
-    return false;
-}
-
-void Stack::display() {
+template <typename T, unsigned int MAX> void Stack<T, MAX>::display() {
     if(isEmpty()) {
         cerr << "Stack Underflow." << endl;
         return;

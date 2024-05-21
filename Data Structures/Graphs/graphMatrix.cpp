@@ -1,19 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Vertex {
-    char data;
-    Vertex(char data = 0): data(data) {}
+template <typename T> struct Vertex {
+    T data;
+    Vertex<T>(T data = T{}): data(data) {}
 };
 
-class Graph {
-    vector<Vertex*> vertices;
+template <typename T> class Graph {
+    vector<Vertex<T>*> vertices;
     vector<vector<bool>> adjacencyMatrix;
     void dfsHelper(unsigned int, vector<bool>&);
     void bfsHelper(unsigned int, vector<bool>&);
 
     public:
-    void addVertex(Vertex*);
+    void addVertex(Vertex<T>*);
     inline void addEdge(unsigned int, unsigned int);
     inline bool checkEdge(unsigned int, unsigned int);
     void dfs(unsigned int);
@@ -21,28 +21,28 @@ class Graph {
     void display();
 };
 
-void Graph::addVertex(Vertex* vertex) {
+template <typename T> void Graph<T>::addVertex(Vertex<T>* vertex) {
     vertices.push_back(vertex);
     
     adjacencyMatrix.resize(vertices.size(), vector<bool>(vertices.size(), false));
 }
 
-inline void Graph::addEdge(unsigned int src, unsigned int dest) {
+template <typename T> inline void Graph<T>::addEdge(unsigned int src, unsigned int dest) {
     adjacencyMatrix[src][dest] = true;
 }
 
-inline bool Graph::checkEdge(unsigned int src, unsigned int dest) {
+template <typename T> inline bool Graph<T>::checkEdge(unsigned int src, unsigned int dest) {
     return adjacencyMatrix[src][dest];
 }
 
-void Graph::dfs(unsigned int src) {
+template <typename T> void Graph<T>::dfs(unsigned int src) {
     vector<bool> visited(vertices.size());
     cout << "[";
     dfsHelper(src, visited);
     cout << "null]" << endl;
 }
 
-void Graph::dfsHelper(unsigned int src, vector<bool>& visited) {
+template <typename T> void Graph<T>::dfsHelper(unsigned int src, vector<bool>& visited) {
     if (visited[src]) return;
 
     visited[src] = true;
@@ -53,14 +53,14 @@ void Graph::dfsHelper(unsigned int src, vector<bool>& visited) {
             dfsHelper(i, visited);
 }
 
-void Graph::bfs(unsigned int src) {
+template <typename T> void Graph<T>::bfs(unsigned int src) {
     vector<bool> visited(vertices.size());
     cout << "[";
     bfsHelper(src, visited);
     cout << "null]" << endl;
 }
 
-void Graph::bfsHelper(unsigned int src, vector<bool>& visited) {
+template <typename T> void Graph<T>::bfsHelper(unsigned int src, vector<bool>& visited) {
     queue<unsigned int> q;
 
     q.push(src);
@@ -77,9 +77,9 @@ void Graph::bfsHelper(unsigned int src, vector<bool>& visited) {
     }
 }
 
-void Graph::display() {
+template <typename T> void Graph<T>::display() {
     cout << "  ";
-    for (Vertex* vertex: vertices)
+    for (Vertex<T>* vertex: vertices)
         cout << vertex -> data << " ";
     cout << endl;
 

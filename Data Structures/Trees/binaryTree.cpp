@@ -1,29 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct TreeNode {
-    int data;
-    TreeNode* left;
-    TreeNode* right;
+template <typename T> struct TreeNode {
+    T data;
+    TreeNode<T>* left;
+    TreeNode<T>* right;
 
-    TreeNode(int data = 0, TreeNode* left = nullptr, TreeNode* right = nullptr): data(data), left(left), right(right) {}
+    TreeNode<T>(T data = T{}, TreeNode<T>* left = nullptr, TreeNode<T>* right = nullptr): data(data), left(left), right(right) {}
 };
 
-void preOrderTraversal(TreeNode* root) {
+template <typename T> void preOrderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
     cout << root -> data << " ";
     preOrderTraversal(root -> left);
     preOrderTraversal(root -> right);
 }
 
-void inOrderTraversal(TreeNode* root) {
+template <typename T> void inOrderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
     inOrderTraversal(root -> left);
     cout << root -> data << " ";
     inOrderTraversal(root -> right);
 }
 
-void postOrderTraversal(TreeNode* root) {
+template <typename T> void postOrderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
     postOrderTraversal(root -> left);
     postOrderTraversal(root -> right);

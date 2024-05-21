@@ -1,77 +1,69 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct ListNode {
-    int data;
-    ListNode* next;
+template <typename T> struct ListNode {
+    T data;
+    ListNode<T>* next;
 
-    ListNode(int data = 0, ListNode* next = nullptr): data(data), next(next) {}
+    ListNode<T>(T data = T{}, ListNode<T>* next = nullptr): data(data), next(next) {}
 };
 
-class Stack {
-    ListNode* top;
+template <typename T> class Stack {
+    ListNode<T>* top;
 
     public:
-    Stack(): top(nullptr) {}
-    void push(int);
-    int pop();
-    int peek();
+    Stack<T>(): top(nullptr) {}
+    void push(T);
+    T pop();
+    T peek();
     unsigned int size();
     inline bool isEmpty();
-    bool contains(int);
     void display();
 };
 
-void Stack::push(int data) {
-    ListNode* newNode = new ListNode(data, top);
+template <typename T> void Stack<T>::push(T data) {
+    ListNode<T>* newNode = new ListNode<T>(data, top);
     top = newNode;
 }
 
-int Stack::pop() {
+template <typename T> T Stack<T>::pop() {
     if (isEmpty()) {
-        cerr << "Stack Underflow." << endl;
-        return -1;
+        cerr << "Stack<T> Underflow." << endl;
+        return T{};
     }
 
-    int data = top -> data;
+    T data = top -> data;
 
-    ListNode* temp = top;
+    ListNode<T>* temp = top;
     top = top -> next;
     delete temp;
 
     return data;
 }
 
-unsigned int Stack::size() {
+template <typename T> unsigned int Stack<T>::size() {
     unsigned int count = 0;
-    for (ListNode* node = top; node != nullptr; node = node -> next, count++);
+    for (ListNode<T>* node = top; node != nullptr; node = node -> next, count++);
     return count;
 }
 
-int Stack::peek() {
+template <typename T> T Stack<T>::peek() {
     if (!isEmpty())
         return top -> data;
-    cerr << "Stack Underflow." << endl;
-    return -1;
+    cerr << "Stack<T> Underflow." << endl;
+    return T{};
 }
 
-inline bool Stack::isEmpty() { return top == nullptr; }
+template <typename T> inline bool Stack<T>::isEmpty() { return top == nullptr; }
 
-bool Stack::contains(int data) {
-    for (ListNode* node = top; node != nullptr; node = node -> next)
-        if (node -> data == data)
-            return true;
-    return false;
-}
-
-void Stack::display() {
+template <typename T> void Stack<T>::display() {
     if (isEmpty()) {
-        cerr << "Stack Underflow." << endl;
+        cerr << "Stack<T> Underflow." << endl;
         return;
     }
 
     cout << "[";
-    for (ListNode* node = top; node != nullptr; node = node -> next)
+    for (ListNode<T>* node = top; node != nullptr; node = node -> next)
         cout << node -> data << ", ";
     cout << "\b\b]" << endl;
 }

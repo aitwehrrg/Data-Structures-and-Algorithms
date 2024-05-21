@@ -1,47 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct ListNode {
-    int data;
-    ListNode *next;
+template <typename T> struct ListNode {
+    T data;
+    ListNode<T>* next;
 
-    ListNode(int data = 0, ListNode* next = nullptr): data(data), next(next) {}
+    ListNode<T>(T data = T{}, ListNode<T><T>* next = nullptr): data(data), next(next) {}
 };
 
-class Queue {
-    ListNode* front;
-    ListNode* rear;
+template <typename T> class Queue {
+    ListNode<T>* front;
+    ListNode<T>* rear;
 
     public:
-    Queue(): front(nullptr), rear(nullptr) {}
-    void enqueue(int);
-    int dequeue();
-    int peek();
+    Queue<T>(): front(nullptr), rear(nullptr) {}
+    void enqueue(T);
+    T dequeue();
+    T peek();
     unsigned int size();
     inline bool isEmpty();
-    bool contains(int);
     void display();
 };
 
-void Queue::enqueue(int data) {
-    ListNode* newNode = new ListNode(data);
-    if (isEmpty()) {
-        front = rear = newNode;
-    } else {
+template <typename T> void Queue<T>::enqueue(T data) {
+    ListNode<T>* newNode = new ListNode<T>(data);
+    if (isEmpty())
+        front = newNode;
+    else
         rear -> next = newNode;
-        rear = newNode;
-    }
+    rear = newNode;
 }
 
-int Queue::dequeue() {
+template <typename T> T Queue<T>::dequeue() {
     if (isEmpty()) {
         cerr << "Queue Underflow." << endl;
-        return -1;
+        return T{};
     }
 
-    int data = front -> data;
+    T data = front -> data;
     
-    ListNode *temp = front;
+    ListNode<T> *temp = front;
     front = front -> next;
     delete temp;
 
@@ -51,37 +49,30 @@ int Queue::dequeue() {
     return data;
 }
 
-int Queue::peek() {
+template <typename T> T Queue<T>::peek() {
     if (!isEmpty())
         return front -> data;
     
     cerr << "Queue Underflow." << endl;
-    return -1;
+    return T{};
 }
 
-unsigned int Queue::size() { 
+template <typename T> unsigned int Queue<T>::size() { 
     unsigned int count = 0;
-    for (ListNode* node = front; node != nullptr; node = node -> next, count++);
+    for (ListNode<T>* node = front; node != nullptr; node = node -> next, count++);
     return count;
 }
 
-inline bool Queue::isEmpty() { return front == nullptr; }
+template <typename T> inline bool Queue<T>::isEmpty() { return front == nullptr; }
 
-bool Queue::contains(int data) {
-    for (ListNode* node = front; node != nullptr; node = node -> next)
-        if (node -> data == data)
-            return true;
-    return false;
-}
-
-void Queue::display() {
+template <typename T> void Queue<T>::display() {
     if (isEmpty()) {
         cerr << "Queue Underflow." << endl;
         return;
     }
 
     cout << "[";
-    for (ListNode* node = front; node != nullptr; node = node -> next)
+    for (ListNode<T>* node = front; node != nullptr; node = node -> next)
         cout << node -> data << ", ";
     cout << "\b\b]" << endl;
 }

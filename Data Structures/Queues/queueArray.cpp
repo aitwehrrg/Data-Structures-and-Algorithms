@@ -1,28 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX 1000
-class Queue {
-    int front,rear;
+template <typename T, unsigned int MAX> class Queue {
+    unsigned int front, rear;
     unsigned int sizeVar;
-    int queue[MAX];
+    T queue[MAX];
     inline unsigned int inc(int, int = 1);
 
     public:
-    Queue(): front(0), rear(-1), sizeVar(0) {};
-    bool enqueue(int);
-    int dequeue();
-    int peek();
+    Queue<T, MAX>(): front(0), rear(MAX - 1), sizeVar(0) {};
+    bool enqueue(T);
+    T dequeue();
+    T peek();
     inline unsigned int size();
     inline bool isEmpty();
     inline bool isFull();
-    bool contains(int);
     void display();
 };
 
-inline unsigned int Queue::inc(int x, int increment) { return (x + increment) % MAX; }
+template <typename T, unsigned int MAX> inline unsigned int Queue<T, MAX>::inc(int x, int increment) { return (x + increment) % MAX; }
 
-bool Queue::enqueue(int data) {
+template <typename T, unsigned int MAX> bool Queue<T, MAX>::enqueue(T data) {
     if (isFull()) {
         cerr << "Queue Overflow." << endl;
         return false;
@@ -32,37 +30,30 @@ bool Queue::enqueue(int data) {
     return true;
 }
 
-int Queue::dequeue() {
+template <typename T, unsigned int MAX> T Queue<T, MAX>::dequeue() {
     if (!isEmpty()) {
         front = inc(front); sizeVar--;
         return queue[inc(front, -1)];
     }
 
     cerr << "Queue Underflow." << endl;
-    return -1;
+    return T{};
 }
 
-int Queue::peek() {
+template <typename T, unsigned int MAX> T Queue<T, MAX>::peek() {
     if (!isEmpty())
         return queue[inc(front)];
     cerr << "Queue Underflow." << endl;
-    return -1;
+    return T{};
 }
 
-inline unsigned int Queue::size() { return sizeVar; }
+template <typename T, unsigned int MAX> inline unsigned int Queue<T, MAX>::size() { return sizeVar; }
 
-inline bool Queue::isEmpty() { return !size(); }
+template <typename T, unsigned int MAX> inline bool Queue<T, MAX>::isEmpty() { return !size(); }
 
-inline bool Queue::isFull() { return size() == MAX; }
+template <typename T, unsigned int MAX> inline bool Queue<T, MAX>::isFull() { return size() == MAX; }
 
-bool Queue::contains(int data) {
-    for (int i = 0; i < size(); i++)
-        if (queue[inc(front, i)] == data)
-            return true;
-    return false;
-}
-
-void Queue::display() {
+template <typename T, unsigned int MAX> void Queue<T, MAX>::display() {
     if (isEmpty()) {
         cerr << "Queue Underflow." << endl;
         return;
