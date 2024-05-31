@@ -19,10 +19,8 @@ inline bool Polish::isDigit(char c) { return c >= '0' && c <= '9'; }
 
 inline bool Polish::isOperator(char c) { return c == '+' || c == '-' || c == '*' || c == '/' || c == '^'; }
 
-int Polish::precedence(char c)
-{
-    switch(c)
-    {
+int Polish::precedence(char c){
+    switch(c){
         case '^':
         return 3;
 
@@ -37,10 +35,8 @@ int Polish::precedence(char c)
     return -1;
 }
 
-float Polish::operation(float a, float b, char c)
-{
-    switch(c)
-    {
+float Polish::operation(float a, float b, char c){
+    switch(c){
         case '+':
         return a + b;
 
