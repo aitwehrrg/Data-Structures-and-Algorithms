@@ -28,7 +28,7 @@ template <typename T> void Stack<T>::push(T data) {
 
 template <typename T> T Stack<T>::pop() {
     if (isEmpty()) {
-        cerr << "Stack<T> Underflow." << endl;
+        cerr << "Stack Underflow." << endl;
         return T{};
     }
 
@@ -50,7 +50,7 @@ template <typename T> unsigned int Stack<T>::size() {
 template <typename T> T Stack<T>::peek() {
     if (!isEmpty())
         return top -> data;
-    cerr << "Stack<T> Underflow." << endl;
+    cerr << "Stack Underflow." << endl;
     return T{};
 }
 
@@ -58,7 +58,7 @@ template <typename T> inline bool Stack<T>::isEmpty() { return top == nullptr; }
 
 template <typename T> void Stack<T>::display() {
     if (isEmpty()) {
-        cerr << "Stack<T> Underflow." << endl;
+        cerr << "Stack Underflow." << endl;
         return;
     }
 
