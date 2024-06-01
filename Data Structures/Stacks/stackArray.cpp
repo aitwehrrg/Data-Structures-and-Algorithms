@@ -6,14 +6,14 @@ template <typename T, unsigned int MAX> class Stack {
     int top;
 
     public:
-    Stack<T, MAX>(): top(-1) {}
+    Stack(): top(-1) {}
     bool push(T);
     T pop();
-    T peek();
-    inline unsigned int size();
-    inline bool isFull();
-    inline bool isEmpty();
-    void display();
+    T peek() const;
+    inline unsigned int size() const;
+    inline bool isFull() const;
+    inline bool isEmpty() const;
+    void display() const;
 };
 
 template <typename T, unsigned int MAX> bool Stack<T, MAX>::push(T data) {
@@ -34,7 +34,7 @@ template <typename T, unsigned int MAX> T Stack<T, MAX>::pop() {
     return T{};
 }
 
-template <typename T, unsigned int MAX> T Stack<T, MAX>::peek() {
+template <typename T, unsigned int MAX> T Stack<T, MAX>::peek() const {
     if (!isEmpty())
         return stack[top];
 
@@ -42,13 +42,13 @@ template <typename T, unsigned int MAX> T Stack<T, MAX>::peek() {
     return T{};
 }
 
-template <typename T, unsigned int MAX> inline unsigned int Stack<T, MAX>::size() { return top + 1; }
+template <typename T, unsigned int MAX> inline unsigned int Stack<T, MAX>::size() const { return top + 1; }
 
-template <typename T, unsigned int MAX> inline bool Stack<T, MAX>::isFull() { return size() == MAX; }
+template <typename T, unsigned int MAX> inline bool Stack<T, MAX>::isFull() const { return size() == MAX; }
 
-template <typename T, unsigned int MAX> inline bool Stack<T, MAX>::isEmpty() { return !size(); }
+template <typename T, unsigned int MAX> inline bool Stack<T, MAX>::isEmpty() const { return !size(); }
 
-template <typename T, unsigned int MAX> void Stack<T, MAX>::display() {
+template <typename T, unsigned int MAX> void Stack<T, MAX>::display() const {
     if(isEmpty()) {
         cerr << "Stack Underflow." << endl;
         return;

@@ -5,7 +5,7 @@ template <typename T> struct ListNode {
     T data;
     ListNode<T>* next;
 
-    ListNode<T>(T data = T{}, ListNode<T><T>* next = nullptr): data(data), next(next) {}
+    ListNode(T data = T{}, ListNode<T><T>* next = nullptr): data(data), next(next) {}
 };
 
 template <typename T> class Queue {
@@ -13,13 +13,13 @@ template <typename T> class Queue {
     ListNode<T>* rear;
 
     public:
-    Queue<T>(): front(nullptr), rear(nullptr) {}
+    Queue(): front(nullptr), rear(nullptr) {}
     void enqueue(T);
     T dequeue();
-    T peek();
-    unsigned int size();
-    inline bool isEmpty();
-    void display();
+    T peek() const;
+    unsigned int size() const;
+    inline bool isEmpty() const;
+    void display() const;
 };
 
 template <typename T> void Queue<T>::enqueue(T data) {
@@ -47,7 +47,7 @@ template <typename T> T Queue<T>::dequeue() {
     return data;
 }
 
-template <typename T> T Queue<T>::peek() {
+template <typename T> T Queue<T>::peek() const {
     if (!isEmpty())
         return front -> data;
     
@@ -55,15 +55,15 @@ template <typename T> T Queue<T>::peek() {
     return T{};
 }
 
-template <typename T> unsigned int Queue<T>::size() { 
+template <typename T> unsigned int Queue<T>::size() const { 
     unsigned int count = 0;
     for (ListNode<T>* node = front; node != nullptr; node = node -> next, count++);
     return count;
 }
 
-template <typename T> inline bool Queue<T>::isEmpty() { return front == nullptr; }
+template <typename T> inline bool Queue<T>::isEmpty() const { return front == nullptr; }
 
-template <typename T> void Queue<T>::display() {
+template <typename T> void Queue<T>::display() const {
     if (isEmpty()) {
         cerr << "Queue Underflow." << endl;
         return;

@@ -1,13 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Polish
-{
+class Polish {
     stack<float> operands;
-    inline bool isDigit(char);
-    inline bool isOperator(char);
-    int precedence(char);
-    float operation(float, float, char);
+    inline bool isDigit(char) const;
+    inline bool isOperator(char) const;
+    int precedence(char) const;
+    float operation(float, float, char) const;
 
     public:
     float prefix(string);
@@ -15,11 +14,11 @@ class Polish
     float infix(string);
 };
 
-inline bool Polish::isDigit(char c) { return c >= '0' && c <= '9'; }
+inline bool Polish::isDigit(char c) const { return c >= '0' && c <= '9'; }
 
-inline bool Polish::isOperator(char c) { return c == '+' || c == '-' || c == '*' || c == '/' || c == '^'; }
+inline bool Polish::isOperator(char c) const { return c == '+' || c == '-' || c == '*' || c == '/' || c == '^'; }
 
-int Polish::precedence(char c) {
+int Polish::precedence(char c) const {
     switch(c) {
         case '^':
         return 3;
@@ -35,7 +34,7 @@ int Polish::precedence(char c) {
     return -1;
 }
 
-float Polish::operation(float a, float b, char c) {
+float Polish::operation(float a, float b, char c) const {
     switch(c) {
         case '+':
         return a + b;

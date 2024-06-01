@@ -3,7 +3,7 @@ using namespace std;
 
 template <typename T> struct Vertex {
     T data;
-    Vertex<T>(T data = T{}): data(data) {}
+    Vertex(T data = T{}): data(data) {}
 };
 
 template <typename T> class Graph {
@@ -15,10 +15,10 @@ template <typename T> class Graph {
     public:
     void addVertex(Vertex<T>*);
     inline void addEdge(unsigned int, unsigned int);
-    inline bool checkEdge(unsigned int, unsigned int);
+    inline bool checkEdge(unsigned int, unsigned int) const;
     void dfs(unsigned int);
     void bfs(unsigned int);
-    void display();
+    void display() const;
 };
 
 template <typename T> void Graph<T>::addVertex(Vertex<T>* vertex) {
@@ -31,7 +31,7 @@ template <typename T> inline void Graph<T>::addEdge(unsigned int src, unsigned i
     adjacencyMatrix[src][dest] = true;
 }
 
-template <typename T> inline bool Graph<T>::checkEdge(unsigned int src, unsigned int dest) {
+template <typename T> inline bool Graph<T>::checkEdge(unsigned int src, unsigned int dest) const {
     return adjacencyMatrix[src][dest];
 }
 
@@ -77,7 +77,7 @@ template <typename T> void Graph<T>::bfsHelper(unsigned int src, vector<bool>& v
     }
 }
 
-template <typename T> void Graph<T>::display() {
+template <typename T> void Graph<T>::display() const {
     cout << "  ";
     for (Vertex<T>* vertex: vertices)
         cout << vertex -> data << " ";
