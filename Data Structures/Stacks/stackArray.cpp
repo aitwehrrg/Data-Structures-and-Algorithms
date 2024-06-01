@@ -18,7 +18,7 @@ template <typename T, unsigned int MAX> class Stack {
 
 template <typename T, unsigned int MAX> bool Stack<T, MAX>::push(T data) {
     if(isFull()) {
-        cerr << "Stack<T, MAX> Overflow." << endl;
+        cerr << "Stack Overflow." << endl;
         return false;
     }
 
