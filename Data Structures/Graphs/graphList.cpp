@@ -37,7 +37,10 @@ template <typename T> void Graph<T>::removeVertex(unsigned int index) {
     for (unsigned int i = 0; i < vertices.size(); i++)
         removeEdge(i, index);
     adjacencyList.erase(adjacencyList.begin() + index);
+
+    Vertex<T>* temp = vertices[index];
     vertices.erase(vertices.begin() + index);
+    delete temp;
 }
 
 template <typename T> bool Graph<T>::exists(T data) const {

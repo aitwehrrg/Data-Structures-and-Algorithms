@@ -41,7 +41,9 @@ template <typename T> void Graph<T>::removeVertex(unsigned int index) {
     for (vector<bool>& row : adjacencyMatrix)
         row.erase(row.begin() + index);
 
+    Vertex<T>* temp = vertices[index];
     vertices.erase(vertices.begin() + index);
+    delete temp;
 }
 
 template <typename T> bool Graph<T>::exists(T data) const {
