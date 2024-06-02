@@ -5,7 +5,7 @@ template <typename T> struct ListNode {
     T data;
     ListNode<T>* next;
 
-    ListNode(T data = T{}, ListNode<T><T>* next = nullptr): data(data), next(next) {}
+    ListNode(T data = T{}, ListNode<T>* next = nullptr): data(data), next(next) {}
 };
 
 template <typename T> class Queue {
