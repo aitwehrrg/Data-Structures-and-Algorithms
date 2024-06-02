@@ -66,7 +66,8 @@ template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::upd
 }
 
 template <typename K, typename V, unsigned int MAX> V HashMap<K, V, MAX>::lookup(K key) const {
-    for (Entry<K, V>* entry : dictionary[hash(key)])
+    unsigned int index = hash(key);
+    for (Entry<K, V>* entry : dictionary[index])
         if (entry -> key == key)
             return entry -> value;
     cout << "Key not found." << endl;

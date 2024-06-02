@@ -6,7 +6,7 @@ template <typename T> struct TreeNode {
     TreeNode<T>* left;
     TreeNode<T>* right;
 
-    TreeNode<T>(T data = T{}, TreeNode<T>* left = nullptr, TreeNode<T>* right = nullptr): data(data), left(left), right(right) {}
+    TreeNode(T data = T{}, TreeNode<T>* left = nullptr, TreeNode<T>* right = nullptr): data(data), left(left), right(right) {}
 };
 
 template <typename T> void preOrderTraversal(TreeNode<T>* root) {
