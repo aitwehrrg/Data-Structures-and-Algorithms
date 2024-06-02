@@ -24,8 +24,8 @@ template <typename T> class Graph {
 };
 
 template <typename T> void Graph<T>::addVertex(T data) {
-    Vertex<T>* vertex = new Vertex<T>(data);
-    vertices.push_back(vertex);
+    Vertex<T>* newVertex = new Vertex<T>(data);
+    vertices.push_back(newVertex);
     for (vector<bool>& row : adjacencyMatrix)
         row.resize(vertices.size(), false);
     adjacencyMatrix.resize(vertices.size(), vector<bool>(vertices.size(), false));
