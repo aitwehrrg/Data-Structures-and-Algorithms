@@ -1,12 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-inline void swap(int* a, int* b) { int temp = *a; *a = *b; *b = temp; }
+template <typename T> inline void swap(T* a, T* b) { T temp = *a; *a = *b; *b = temp; }
 
-void bubbleSort(vector<int>& arr, bool reverse = false) {
-    int n = arr.size();
+template <typename T> vector<T> bubbleSort(vector<T>& array, bool reverse = false) {
+    unsigned int n = array.size();
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n - i - 1; j++)
-            if ((!reverse && arr[j] > arr[j + 1]) || (reverse && arr[j] < arr[j + 1]))
-                swap(arr[j], arr[j + 1]);
+            if ((!reverse && array[j] > array[j + 1]) || (reverse && array[j] < array[j + 1]))
+                swap(array[j], array[j + 1]);
+    return array;
 }

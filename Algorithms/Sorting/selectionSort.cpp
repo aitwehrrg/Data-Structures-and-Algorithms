@@ -1,16 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-inline void swap(int* a, int* b) { int temp = *a; *a = *b; *b = temp; }
+template <typename T> inline void swap(T* a, T* b) { T temp = *a; *a = *b; *b = temp; }
 
-void selectionSort(vector<int>& arr, bool reverse = false) {
-    int n = arr.size();
+template <typename T> vector<T> selectionSort(vector<T>& array, bool reverse = false) {
+    unsigned int n = array.size();
     for (int i = 0; i < n - 1; i++) {
         unsigned int minIndex = i;
         for (int j = i + 1; j < n; j++)
-            if ((!reverse && arr[j] < arr[minIndex]) || (reverse && arr[j] > arr[minIndex]))
+            if ((!reverse && array[j] < array[minIndex]) || (reverse && array[j] > array[minIndex]))
                 minIndex = j;
 
-        if (minIndex != i) swap(&arr[minIndex], &arr[i]);
+        if (minIndex != i) swap(&array[minIndex], &array[i]);
     }
+    return array;
 }
