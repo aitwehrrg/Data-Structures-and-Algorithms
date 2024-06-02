@@ -10,36 +10,69 @@ template <typename T> class Graph {
     vector<Vertex<T>*> vertices;
     vector<vector<bool>> adjacencyMatrix;
     void dfsHelper(unsigned int, vector<bool>&);
-    void bfsHelper(unsigned int, vector<bool>&);
 
     public:
-    void addVertex(Vertex<T>*);
+    void addVertex(T);
+    void removeVertex(unsigned int);
+    bool exists(T) const;
     inline void addEdge(unsigned int, unsigned int);
+    inline void removeEdge(unsigned int, unsigned int);
     inline bool checkEdge(unsigned int, unsigned int) const;
-    void dfs(unsigned int);
-    void bfs(unsigned int);
+    void depthFirstSearch(unsigned int) const;
+    void breadthFirstSearch(unsigned int) const;
     void display() const;
 };
 
-template <typename T> void Graph<T>::addVertex(Vertex<T>* vertex) {
+template <typename T> void Graph<T>::addVertex(T data) {
+    Vertex<T>* vertex = new Vertex<T>(data);
     vertices.push_back(vertex);
-    
+    for (vector<bool>& row : adjacencyMatrix)
+        row.resize(vertices.size(), false);
     adjacencyMatrix.resize(vertices.size(), vector<bool>(vertices.size(), false));
 }
 
+template <typename T> void Graph<T>::removeVertex(unsigned int index) {
+    if (index >= vertices.size()) {
+        cout << "Vertex does not exist." << endl;
+        return;
+    }
+
+    adjacencyMatrix.erase(adjacencyMatrix.begin() + index);
+    for (vector<bool>& row : adjacencyMatrix)
+        row.erase(row.begin() + index);
+
+    vertices.erase(vertices.begin() + index);
+}
+
+template <typename T> bool Graph<T>::exists(T data) const {
+    for (int i = 0; i < vertices.size(); i++)
+        if (vertices[i] -> data == data)
+            return true;
+    return false;
+}
+
 template <typename T> inline void Graph<T>::addEdge(unsigned int src, unsigned int dest) {
-    adjacencyMatrix[src][dest] = true;
+    if (src < vertices.size() && dest < vertices.size())
+        adjacencyMatrix[src][dest] = true;
 }
 
-template <typename T> inline bool Graph<T>::checkEdge(unsigned int src, unsigned int dest) const {
-    return adjacencyMatrix[src][dest];
+template <typename T> inline void Graph<T>::removeEdge(unsigned int src, unsigned int dest) {
+    if (src < vertices.size() && dest < vertices.size())
+        adjacencyMatrix[src][dest] = false;
 }
 
-template <typename T> void Graph<T>::dfs(unsigned int src) {
+template <typename T> inline bool Graph<T>::checkEdge(unsigned int src, unsigned int dest) const { return src < vertices.size() && dest < vertices.size() && adjacencyMatrix[src][dest]; }
+
+template <typename T> void Graph<T>::depthFirstSearch(unsigned int src) const {
+    if (src >= vertices.size()) {
+        cout << "Vertex does not exist." << endl;
+        return;
+    }
+
     vector<bool> visited(vertices.size());
     cout << "[";
     dfsHelper(src, visited);
-    cout << "null]" << endl;
+    cout << "]" << endl;
 }
 
 template <typename T> void Graph<T>::dfsHelper(unsigned int src, vector<bool>& visited) {
@@ -53,16 +86,16 @@ template <typename T> void Graph<T>::dfsHelper(unsigned int src, vector<bool>& v
             dfsHelper(i, visited);
 }
 
-template <typename T> void Graph<T>::bfs(unsigned int src) {
+template <typename T> void Graph<T>::breadthFirstSearch(unsigned int src) const {
+    if (src >= vertices.size()) {
+        cout << "Vertex does not exist." << endl;
+        return;
+    }
+
     vector<bool> visited(vertices.size());
     cout << "[";
-    bfsHelper(src, visited);
-    cout << "null]" << endl;
-}
 
-template <typename T> void Graph<T>::bfsHelper(unsigned int src, vector<bool>& visited) {
     queue<unsigned int> q;
-
     q.push(src);
     visited[src] = true;
 
@@ -75,9 +108,15 @@ template <typename T> void Graph<T>::bfsHelper(unsigned int src, vector<bool>& v
                 visited[i] = true;
             }
     }
+    cout << "]" << endl;
 }
 
 template <typename T> void Graph<T>::display() const {
+    if (vertices.size() == 0) {
+        cout << "Graph is empty." << endl;
+        return;
+    }
+
     cout << "  ";
     for (Vertex<T>* vertex: vertices)
         cout << vertex -> data << " ";
