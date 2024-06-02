@@ -6,12 +6,12 @@ template <typename T, unsigned int MAX> class PriorityQueue {
     unsigned int sizeVar;
     T queue[MAX];
     inline unsigned int inc(int, int = 1) const;
-    bool rev;
+    bool reverse;
     void swap(T*, T*) const;
     void sort();
 
     public:
-    PriorityQueue(bool rev = false): front(0), rear(MAX - 1), sizeVar(0), rev(rev) {};
+    PriorityQueue(bool reverse = false): front(0), rear(MAX - 1), sizeVar(0), reverse(reverse) {};
     bool enqueue(T);
     T dequeue();
     T peek() const;
@@ -26,7 +26,7 @@ template <typename T, unsigned int MAX> inline void PriorityQueue<T, MAX>::swap(
 template <typename T, unsigned int MAX> void PriorityQueue<T, MAX>::sort() {
     for (int i = 0; i < size(); i++)
         for (int j = i + 1; j < size(); j++)
-            if ((!rev && queue[i] < queue[j]) || (rev && queue[i] > queue[j]))
+            if ((!reverse && queue[i] < queue[j]) || (reverse && queue[i] > queue[j]))
                 swap(&queue[i], &queue[j]);
 }
 

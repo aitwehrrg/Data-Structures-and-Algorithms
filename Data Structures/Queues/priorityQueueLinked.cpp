@@ -10,10 +10,10 @@ template <typename T> struct ListNode {
 
 template <typename T> class PriorityQueue {
     ListNode<T>* head;
-    bool rev;
+    bool reverse;
 
     public:
-    PriorityQueue(bool rev = false): head(nullptr), rev(rev) {}
+    PriorityQueue(bool reverse = false): head(nullptr), reverse(reverse) {}
     void enqueue(T);
     T dequeue();
     T peek() const;
@@ -29,12 +29,12 @@ template <typename T> void PriorityQueue<T>::enqueue(T data) {
         return;
     }
 
-    if ((!rev && head -> data < data) || (rev && head -> data > data)) {
+    if ((!reverse && head -> data < data) || (reverse && head -> data > data)) {
         newNode -> next = head;
         head = newNode;
     } else {
         ListNode<T>* node = head;
-        while (node -> next != nullptr && ((!rev && node -> next -> data > data) || (rev && node -> next -> data < data)))
+        while (node -> next != nullptr && ((!reverse && node -> next -> data > data) || (reverse && node -> next -> data < data)))
             node = node -> next;
         newNode -> next = node -> next;
         node -> next = newNode;
