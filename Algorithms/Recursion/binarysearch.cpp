@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int binarySearch(vector<int>& arr, int key, int low, int high) {
+template <typename T> T binarySearch(vector<T>& arr, T key, unsigned int low, unsigned int high) {
     if (low > high) return -1;
     int mid = (low + high) / 2;
     if (arr[mid] == key) return mid;
