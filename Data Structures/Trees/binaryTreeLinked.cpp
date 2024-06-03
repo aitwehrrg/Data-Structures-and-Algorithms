@@ -12,20 +12,20 @@ template <typename T> struct TreeNode {
 template <typename T> void preorderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
     cout << root -> data << " ";
-    preOrderTraversal(root -> left);
-    preOrderTraversal(root -> right);
+    preorderTraversal(root -> left);
+    preorderTraversal(root -> right);
 }
 
 template <typename T> void inorderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
-    inOrderTraversal(root -> left);
+    inorderTraversal(root -> left);
     cout << root -> data << " ";
-    inOrderTraversal(root -> right);
+    inorderTraversal(root -> right);
 }
 
 template <typename T> void postorderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
-    postOrderTraversal(root -> left);
-    postOrderTraversal(root -> right);
+    postorderTraversal(root -> left);
+    postorderTraversal(root -> right);
     cout << root -> data << " ";
 }
