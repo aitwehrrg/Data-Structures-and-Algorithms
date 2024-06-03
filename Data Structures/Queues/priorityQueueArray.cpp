@@ -7,8 +7,7 @@ template <typename T, unsigned int MAX> class PriorityQueue {
     T queue[MAX];
     inline unsigned int inc(int, int = 1) const;
     bool reverse;
-    void swap(T*, T*) const;
-    void sort();
+    void insert(T data, unsigned int index);
 
     public:
     PriorityQueue(bool reverse = false): front(0), rear(MAX - 1), sizeVar(0), reverse(reverse) {};
@@ -21,13 +20,10 @@ template <typename T, unsigned int MAX> class PriorityQueue {
     void display() const;
 };
 
-template <typename T, unsigned int MAX> inline void PriorityQueue<T, MAX>::swap(T* a, T* b) const { T temp = *a; *a = *b; *b = temp; }
-
-template <typename T, unsigned int MAX> void PriorityQueue<T, MAX>::sort() {
-    for (int i = 0; i < size(); i++)
-        for (int j = i + 1; j < size(); j++)
-            if ((!reverse && queue[i] < queue[j]) || (reverse && queue[i] > queue[j]))
-                swap(&queue[i], &queue[j]);
+template <typename T, unsigned int MAX> void PriorityQueue<T, MAX>::insert(T data, unsigned int index) {
+    for (int i = sizeVar - 1; i > index; i--)
+        queue[inc(front, i)] = queue[inc(front, i - 1)];
+    queue[inc(front, index)] = data;
 }
 
 template <typename T, unsigned int MAX> inline unsigned int PriorityQueue<T, MAX>::inc(int x, int increment) const { return (x + increment) % MAX; }
@@ -38,10 +34,12 @@ template <typename T, unsigned int MAX> bool PriorityQueue<T, MAX>::enqueue(T da
         return false;
     }
     rear = inc(rear); sizeVar++;
-    queue[rear] = data;
 
-    sort();
-    return true;
+    int i = 0;
+    while (i < sizeVar - 1 && ((!reverse && queue[inc(front, i)] > data) || (reverse && queue[inc(front, i)] < data)))
+        i = inc(i);
+    insert(data, i);
+    return false;
 }
 
 template <typename T, unsigned int MAX> T PriorityQueue<T, MAX>::dequeue() {
