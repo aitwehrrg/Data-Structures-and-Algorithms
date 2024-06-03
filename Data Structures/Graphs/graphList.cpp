@@ -19,6 +19,7 @@ template <typename T> class Graph {
     bool checkEdge(unsigned int, unsigned int) const;
     void depthFirstSearch(unsigned int) const;
     void breadthFirstSearch(unsigned int) const;
+    inline bool isEmpty() const;
     void display() const;
 };
 
@@ -58,8 +59,8 @@ template <typename T> void Graph<T>::addEdge(unsigned int src, unsigned int dest
 template <typename T> void Graph<T>::removeEdge(unsigned int src, unsigned int dest) {
     if (!checkEdge(src, dest)) return;
 
-    for (unsigned int index : adjacencyList[src])
-        if (index == dest) {
+    for (unsigned int neighbor : adjacencyList[src])
+        if (neighbor == dest) {
             adjacencyList[src].remove(index);
             return;
         }
@@ -92,10 +93,10 @@ template <typename T> void Graph<T>::depthFirstSearch(unsigned int src) const {
     while (!s.empty()) {
         src = s.top(); s.pop();
         cout << vertices[src] -> data << " -> ";
-        for (unsigned int index : adjacencyList[src])
-            if (!visited[index]) {
-                s.push(index);
-                visited[index] = true;
+        for (unsigned int neighbor : adjacencyList[src])
+            if (!visited[neighbor]) {
+                s.push(neighbor);
+                visited[neighbor] = true;
             }
     }
     cout << "]" << endl;
@@ -117,25 +118,27 @@ template <typename T> void Graph<T>::breadthFirstSearch(unsigned int src) const 
     while (!q.empty()) {
         src = q.front(); q.pop();
         cout << vertices[src] -> data << " -> ";
-        for (unsigned int index : adjacencyList[src])
-            if (!visited[index]) {
-                q.push(index);
-                visited[index] = true;
+        for (unsigned int neighbor : adjacencyList[src])
+            if (!visited[neighbor]) {
+                q.push(neighbor);
+                visited[neighbor] = true;
             }
     }
     cout << "]" << endl;
 }
 
+template <typename T> inline bool Graph<T>::isEmpty() const { return !vertices.size(); }
+
 template <typename T> void Graph<T>::display() const {
-    if (vertices.size() == 0) {
+    if (isEmpty()) {
         cout << "Graph is empty." << endl;
         return;
     }
 
     for (int i = 0; i < vertices.size(); i++) {
         cout << vertices[i] -> data << " -> ";
-        for (unsigned int index : adjacencyList[i])
-            cout << vertices[index] -> data << " -> ";
+        for (unsigned int neighbor : adjacencyList[i])
+            cout << vertices[neighbor] -> data << " -> ";
         cout << endl;
     }
 }

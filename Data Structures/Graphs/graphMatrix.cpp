@@ -20,6 +20,7 @@ template <typename T> class Graph {
     inline bool checkEdge(unsigned int, unsigned int) const;
     void depthFirstSearch(unsigned int) const;
     void breadthFirstSearch(unsigned int) const;
+    inline bool isEmpty() const;
     void display() const;
 };
 
@@ -113,8 +114,10 @@ template <typename T> void Graph<T>::breadthFirstSearch(unsigned int src) const 
     cout << "]" << endl;
 }
 
+template <typename T> inline bool Graph<T>::isEmpty() const { return !vertices.size(); }
+
 template <typename T> void Graph<T>::display() const {
-    if (vertices.size() == 0) {
+    if (isEmpty()) {
         cout << "Graph is empty." << endl;
         return;
     }
