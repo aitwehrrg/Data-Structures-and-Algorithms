@@ -39,7 +39,7 @@ template <typename T, unsigned int MAX> bool PriorityQueue<T, MAX>::enqueue(T da
     while (i < sizeVar - 1 && ((!reverse && queue[inc(front, i)] > data) || (reverse && queue[inc(front, i)] < data)))
         i = inc(i);
     insert(data, i);
-    return false;
+    return true;
 }
 
 template <typename T, unsigned int MAX> T PriorityQueue<T, MAX>::dequeue() {
