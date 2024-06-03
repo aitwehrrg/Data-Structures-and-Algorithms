@@ -9,21 +9,21 @@ template <typename T> struct TreeNode {
     TreeNode(T data = T{}, TreeNode<T>* left = nullptr, TreeNode<T>* right = nullptr): data(data), left(left), right(right) {}
 };
 
-template <typename T> void preOrderTraversal(TreeNode<T>* root) {
+template <typename T> void preorderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
     cout << root -> data << " ";
     preOrderTraversal(root -> left);
     preOrderTraversal(root -> right);
 }
 
-template <typename T> void inOrderTraversal(TreeNode<T>* root) {
+template <typename T> void inorderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
     inOrderTraversal(root -> left);
     cout << root -> data << " ";
     inOrderTraversal(root -> right);
 }
 
-template <typename T> void postOrderTraversal(TreeNode<T>* root) {
+template <typename T> void postorderTraversal(TreeNode<T>* root) {
     if (root == nullptr) return;
     postOrderTraversal(root -> left);
     postOrderTraversal(root -> right);
