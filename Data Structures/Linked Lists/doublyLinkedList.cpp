@@ -71,7 +71,7 @@ template <typename T> void LinkedList<T>::insertAtEnd(T data) {
 
 template <typename T> void LinkedList<T>::deleteAtBeginning() {
     if (isEmpty()) {
-        cout << "List Underflow." << endl;
+        cerr << "List Underflow." << endl;
         return;
     }
 
@@ -83,7 +83,7 @@ template <typename T> void LinkedList<T>::deleteAtBeginning() {
 
 template <typename T> void LinkedList<T>::deleteAtEnd() {
     if (isEmpty()) {
-        cout << "List Underflow." << endl;
+        cerr << "List Underflow." << endl;
         return;
     }
 
@@ -107,7 +107,7 @@ template <typename T> inline bool LinkedList<T>::isEmpty() const { return head =
 
 template <typename T> void LinkedList<T>::display() const {
     if (isEmpty()) {
-        cout << "List Underflow." << endl;
+        cerr << "List Underflow." << endl;
         return;
     }
 

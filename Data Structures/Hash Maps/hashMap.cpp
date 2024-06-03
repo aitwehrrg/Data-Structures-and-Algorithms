@@ -36,7 +36,7 @@ template <typename K, typename V, unsigned int MAX> unsigned int HashMap<K, V, M
 template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::insert(K key, V value) {
     unsigned int index = hash(key);
     if (exists(key)) {
-        cout << "Key already exists." << endl;
+        cerr << "Key already exists." << endl;
         return;
     }
     keys.push_back(key);
@@ -52,7 +52,7 @@ template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::rem
             delete entry;
             return;
         }
-    cout << "Key not found." << endl;
+    cerr << "Key not found." << endl;
 }
 
 template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::update(K key, V value) {
@@ -62,7 +62,7 @@ template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::upd
             entry -> value = value;
             return;
         }    
-    cout << "Key not found." << endl;    
+    cerr << "Key not found." << endl;    
 }
 
 template <typename K, typename V, unsigned int MAX> V HashMap<K, V, MAX>::lookup(K key) const {
@@ -70,7 +70,7 @@ template <typename K, typename V, unsigned int MAX> V HashMap<K, V, MAX>::lookup
     for (Entry<K, V>* entry : dictionary[index])
         if (entry -> key == key)
             return entry -> value;
-    cout << "Key not found." << endl;
+    cerr << "Key not found." << endl;
     return V{};
 }
 
@@ -85,7 +85,7 @@ template <typename K, typename V, unsigned int MAX> inline bool HashMap<K, V, MA
 
 template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::display() const {
     if (isEmpty()) {
-        cout << "Hash Map is empty." << endl;
+        cerr << "Hash Map is empty." << endl;
         return;
     }
     cout << "[" << endl;

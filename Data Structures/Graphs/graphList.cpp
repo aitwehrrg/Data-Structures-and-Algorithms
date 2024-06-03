@@ -31,7 +31,7 @@ template <typename T> void Graph<T>::addVertex(T data) {
 
 template <typename T> void Graph<T>::removeVertex(unsigned int index) {
     if (index >= vertices.size()) {
-        cout << "Vertex does not exist." << endl;
+        cerr << "Vertex does not exist." << endl;
         return;
     }
 
@@ -68,7 +68,7 @@ template <typename T> void Graph<T>::removeEdge(unsigned int src, unsigned int d
 
 template <typename T> bool Graph<T>::checkEdge(unsigned int src, unsigned int dest) const {
     if (src >= vertices.size() || dest >= vertices.size()) {
-        cout << "Vertex does not exist." << endl;
+        cerr << "Vertex does not exist." << endl;
         return false;
     }
 
@@ -80,7 +80,7 @@ template <typename T> bool Graph<T>::checkEdge(unsigned int src, unsigned int de
 
 template <typename T> void Graph<T>::depthFirstSearch(unsigned int src) const {
     if (src >= vertices.size()) {
-        cout << "Vertex does not exist." << endl;
+        cerr << "Vertex does not exist." << endl;
         return;
     }
 
@@ -104,7 +104,7 @@ template <typename T> void Graph<T>::depthFirstSearch(unsigned int src) const {
 
 template <typename T> void Graph<T>::breadthFirstSearch(unsigned int src) const {
     if (src >= vertices.size()) {
-        cout << "Vertex does not exist." << endl;
+        cerr << "Vertex does not exist." << endl;
         return;
     }
 
@@ -131,7 +131,7 @@ template <typename T> inline bool Graph<T>::isEmpty() const { return !vertices.s
 
 template <typename T> void Graph<T>::display() const {
     if (isEmpty()) {
-        cout << "Graph is empty." << endl;
+        cerr << "Graph is empty." << endl;
         return;
     }
 
