@@ -36,8 +36,8 @@ template <typename T, unsigned int MAX> bool PriorityQueue<T, MAX>::enqueue(T da
     rear = inc(rear); sizeVar++;
 
     int i = 0;
-    while (i < sizeVar - 1 && ((!reverse && queue[inc(front, i)] > data) || (reverse && queue[inc(front, i)] < data)))
-        i = inc(i);
+    while (i < size() - 1 && ((!reverse && queue[inc(front, i)] > data) || (reverse && queue[inc(front, i)] < data)))
+        i++;
     insert(data, i);
     return true;
 }
@@ -54,7 +54,7 @@ template <typename T, unsigned int MAX> T PriorityQueue<T, MAX>::dequeue() {
 
 template <typename T, unsigned int MAX> T PriorityQueue<T, MAX>::peek() const {
     if (!isEmpty())
-        return queue[inc(front)];
+        return queue[front];
     cerr << "Queue Underflow." << endl;
     return T{};
 }
