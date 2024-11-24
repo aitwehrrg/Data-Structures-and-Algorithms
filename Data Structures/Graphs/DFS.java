@@ -2,7 +2,6 @@ import java.util.*;
 
 public class DFS {
     public static List<Vertex> dfs(Graph G, Vertex src) {
-        Map<Vertex, Set<Edge>> adjacencyList = G.getAdjacencyList();
         Set<Vertex> visited = new HashSet<>();
         Stack<Vertex> stack = new Stack<>();
         List<Vertex> result = new ArrayList<>();
@@ -12,7 +11,7 @@ public class DFS {
         while (!stack.isEmpty()) {
             Vertex vertex = stack.pop();
             result.add(vertex);
-            for (Edge edge : adjacencyList.get(vertex)) {
+            for (Edge edge : G.getAdjacencyList().get(vertex)) {
                 if (!visited.contains(edge.dest())) {
                     stack.push(edge.dest());
                     visited.add(edge.dest());

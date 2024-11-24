@@ -5,11 +5,10 @@ public class UnionFind {
     private final Map<Vertex, Integer> rank;
 
     public UnionFind(Graph G) {
-        Set<Vertex> vertices = G.getVertices();
         this.parent = new HashMap<>();
         this.rank = new HashMap<>();
 
-        for (Vertex vertex : vertices) {
+        for (Vertex vertex : G.getVertices()) {
             parent.put(vertex, vertex);
             rank.put(vertex, 0);
         }

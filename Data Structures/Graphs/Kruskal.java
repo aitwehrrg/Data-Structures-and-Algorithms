@@ -6,9 +6,8 @@ public class Kruskal {
         int weight = 0;
         UnionFind unionFind = new UnionFind(G);
 
-        Map<Vertex, Set<Edge>> adjacencyList = G.getAdjacencyList();
         List<Edge> edges = new ArrayList<>();
-        for (Vertex vertex : G.getVertices()) edges.addAll(adjacencyList.get(vertex));
+        for (Vertex vertex : G.getVertices()) edges.addAll(G.getAdjacencyList().get(vertex));
 
         edges.sort(Comparator.comparingInt(Edge::weight));
         for (Edge edge : edges) {
@@ -43,7 +42,8 @@ public class Kruskal {
         Map<Integer, Set<Edge>> result = kruskal(G);
         int weight = result.keySet().iterator().next();
         System.out.println(weight);
-        for (Edge edge : result.get(weight)) System.out.println(edge);
+        for (Edge edge : result.get(weight))
+            System.out.println(edge);
         scanner.close();
     }
 }

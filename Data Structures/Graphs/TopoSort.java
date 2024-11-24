@@ -24,7 +24,7 @@ public class TopoSort {
         Stack<Vertex> stack = new Stack<>();
         List<Vertex> result = new ArrayList<>();
 
-        for (Vertex vertex : G.getAdjacencyList().keySet()) {
+        for (Vertex vertex : G.getVertices()) {
             if (!visited.contains(vertex))
                 if (!topoSortHelper(G, vertex, visited, inStack, stack))
                     return null;
@@ -50,7 +50,7 @@ public class TopoSort {
         }
 
         List<Vertex> result = topoSort(G);
-        System.out.println((result == null) ? "Cycle detected" : result);
+        System.out.println(result == null ? "Cycle detected" : result);
         scanner.close();
     }
 }

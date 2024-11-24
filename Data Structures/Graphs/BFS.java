@@ -2,7 +2,6 @@ import java.util.*;
 
 public class BFS {
     public static List<Vertex> bfs(Graph G, Vertex src) {
-        Map<Vertex, Set<Edge>> adjacencyList = G.getAdjacencyList();
         Set<Vertex> visited = new HashSet<>();
         Queue<Vertex> queue = new LinkedList<>();
         List<Vertex> result = new ArrayList<>();
@@ -12,7 +11,7 @@ public class BFS {
         while (!queue.isEmpty()) {
             Vertex vertex = queue.poll();
             result.add(vertex);
-            for (Edge edge : adjacencyList.get(vertex)) {
+            for (Edge edge : G.getAdjacencyList().get(vertex)) {
                 if (!visited.contains(edge.dest())) {
                     queue.offer(edge.dest());
                     visited.add(edge.dest());

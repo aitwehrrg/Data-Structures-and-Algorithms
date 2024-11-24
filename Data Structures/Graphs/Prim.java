@@ -6,12 +6,11 @@ public class Prim {
         int weight = 0;
         Set<Vertex> visited = new HashSet<>();
         PriorityQueue<Edge> minHeap = new PriorityQueue<>(Comparator.comparingInt(Edge::weight));
-        Map<Vertex, Set<Edge>> adjacencyList = G.getAdjacencyList();
 
         Vertex start = G.getVertices().iterator().next();
         visited.add(start);
 
-        minHeap.addAll(adjacencyList.getOrDefault(start, Collections.emptySet()));
+        minHeap.addAll(G.getAdjacencyList().get(start));
         while (!minHeap.isEmpty()) {
             Edge edge = minHeap.poll();
             if (visited.contains(edge.dest())) continue;
@@ -19,7 +18,7 @@ public class Prim {
             mst.add(edge);
             weight += edge.weight();
             visited.add(edge.dest());
-            for (Edge adjacentEdge : adjacencyList.getOrDefault(edge.dest(), Collections.emptySet())) {
+            for (Edge adjacentEdge : G.getAdjacencyList().get(edge.dest())) {
                 if (!visited.contains(adjacentEdge.dest()))
                     minHeap.add(adjacentEdge);
             }
@@ -48,7 +47,8 @@ public class Prim {
         Map<Integer, Set<Edge>> result = prim(G);
         int weight = result.keySet().iterator().next();
         System.out.println(weight);
-        for (Edge edge : result.get(weight)) System.out.println(edge);
+        for (Edge edge : result.get(weight))
+            System.out.println(edge);
         scanner.close();
     }
 }

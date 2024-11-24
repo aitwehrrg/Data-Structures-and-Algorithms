@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class Dijkstra {
+    private static final int INF = Integer.MAX_VALUE;
+
     private record Pair(Vertex vertex, int distance) {
         @Override
         public String toString() {
@@ -12,9 +14,8 @@ public class Dijkstra {
         PriorityQueue<Pair> minHeap = new PriorityQueue<>(Comparator.comparingInt(Pair::distance));
         Map<Vertex, Integer> distances = new HashMap<>();
         Set<Vertex> visited = new HashSet<>();
-        Map<Vertex, Set<Edge>> adjacencyList = G.getAdjacencyList();
 
-        for (Vertex vertex : G.getVertices()) distances.put(vertex, Integer.MAX_VALUE);
+        for (Vertex vertex : G.getVertices()) distances.put(vertex, INF);
         distances.put(src, 0);
 
         minHeap.add(new Pair(src, 0));
@@ -25,7 +26,7 @@ public class Dijkstra {
             if (visited.contains(current)) continue;
             visited.add(current);
 
-            for (Edge edge : adjacencyList.getOrDefault(current, Collections.emptySet())) {
+            for (Edge edge : G.getAdjacencyList().get(current)) {
                 Vertex neighbor = edge.dest();
                 int newDist = distances.get(current) + edge.weight();
 
@@ -54,7 +55,8 @@ public class Dijkstra {
         }
         String src = scanner.next();
         Map<Vertex, Integer> distances = dijkstra(G, G.getVertex(src));
-        for (Vertex vertex : G.getVertices()) System.out.println(vertex + " : " + distances.get(vertex));
+        for (Vertex vertex : G.getVertices())
+            System.out.println(vertex + " : " + distances.get(vertex));
         scanner.close();
     }
 }
