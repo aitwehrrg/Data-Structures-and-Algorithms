@@ -4,39 +4,59 @@ public class Graph {
     private final Map<Vertex, Set<Edge>> adjacencyList;
     private final Map<String, Vertex> vertices;
 
+    private int V, E;
+
     public Graph() {
         this.adjacencyList = new HashMap<>();
         this.vertices = new HashMap<>();
+        this.V = 0; this.E = 0;
     }
 
-    public void addVertex(String label) {
+    public Vertex addVertex(String label) {
         vertices.putIfAbsent(label, new Vertex(label));
         adjacencyList.putIfAbsent(vertices.get(label), new HashSet<>());
+        V = vertices.size();
+        return vertices.get(label);
     }
 
-    public Vertex getVertex(String label) {
-        return vertices.getOrDefault(label, null);
+    public Optional<Vertex> getVertex(String label) {
+        return Optional.ofNullable(vertices.getOrDefault(label, null));
     }
 
     public Set<Vertex> getVertices() {
         return adjacencyList.keySet();
     }
 
-    public void addEdge(String uLabel, String vLabel, int w) {
-        Vertex u = vertices.get(uLabel);
-        Vertex v = vertices.get(vLabel);
-        adjacencyList.computeIfAbsent(u, _ -> new HashSet<>()).add(new Edge(u, v, w));
+    public Edge addEdge(Vertex u, Vertex v, int w) {
+        Edge edge = new Edge(u, v, w);
+        if (!adjacencyList.get(u).add(edge)) E++;
+        return edge;
     }
 
     public Map<Vertex, Set<Edge>> getAdjacencyList() {
         return adjacencyList;
     }
 
+    public int V() {
+        return V;
+    }
+
+    public int E() {
+        return E;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return adjacencyList.equals(((Graph) o).adjacencyList);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Vertex, Set<Edge>> entry : adjacencyList.entrySet())
-            sb.append(entry.getKey()).append(" : ").append(entry.getValue()).append("\n");
+        for (Vertex vertex : getVertices())
+            sb.append(vertex).append(" : ").append(getAdjacencyList().get(vertex)).append("\n");
         return sb.toString();
     }
 }

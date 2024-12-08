@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class UnionFind {
+public class DisjointSet {
     private final Map<Vertex, Vertex> parent;
     private final Map<Vertex, Integer> rank;
 
-    public UnionFind(Graph G) {
+    public DisjointSet(Graph G) {
         this.parent = new HashMap<>();
         this.rank = new HashMap<>();
 
@@ -14,20 +14,21 @@ public class UnionFind {
         }
     }
 
-    public void union(Vertex u, Vertex v) {
+    public boolean union(Vertex u, Vertex v) {
         Vertex rootU = parent.get(u);
         Vertex rootV = parent.get(v);
 
-        if (!rootU.equals(rootV)) {
-            if (rank.get(rootU) > rank.get(rootV))
-                parent.put(rootV, rootU);
-            else if (rank.get(rootU) < rank.get(rootV))
-                parent.put(rootU, rootV);
-            else {
-                parent.put(rootV, rootU);
-                rank.put(rootU, rank.get(rootU) + 1);
-            }
+        if (rootU.equals(rootV)) return false;
+        
+        if (rank.get(rootU) > rank.get(rootV))
+            parent.put(rootV, rootU);
+        else if (rank.get(rootU) < rank.get(rootV))
+            parent.put(rootU, rootV);
+        else {
+            parent.put(rootV, rootU);
+            rank.put(rootU, rank.get(rootU) + 1);
         }
+        return true;
     }
 
     public Vertex find(Vertex u) {
@@ -37,5 +38,10 @@ public class UnionFind {
 
     public boolean connected(Vertex u, Vertex v) {
         return find(u).equals(find(v));
+    }
+
+    @Override
+    public String toString() {
+        return parent.toString();
     }
 }

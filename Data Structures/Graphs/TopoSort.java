@@ -1,21 +1,21 @@
 import java.util.*;
 
 public class TopoSort {
-    private static boolean topoSortHelper(Graph G, Vertex vertex, Set<Vertex> visited, Set<Vertex> inStack, Stack<Vertex> stack) {
+    private static boolean cycleExists(Graph G, Vertex vertex, Set<Vertex> visited, Set<Vertex> inStack, Stack<Vertex> stack) {
         visited.add(vertex);
         inStack.add(vertex);
 
         for (Edge edge : G.getAdjacencyList().get(vertex)) {
             Vertex neighbor = edge.dest();
-            if (inStack.contains(neighbor)) return false;
+            if (inStack.contains(neighbor)) return true;
             if (!visited.contains(neighbor))
-                if (!topoSortHelper(G, neighbor, visited, inStack, stack))
-                    return false;
+                if (cycleExists(G, neighbor, visited, inStack, stack))
+                    return true;
         }
 
         inStack.remove(vertex);
         stack.push(vertex);
-        return true;
+        return false;
     }
 
     public static Optional<List<Vertex>> topoSort(Graph G) {
@@ -26,7 +26,7 @@ public class TopoSort {
 
         for (Vertex vertex : G.getVertices()) {
             if (!visited.contains(vertex))
-                if (!topoSortHelper(G, vertex, visited, inStack, stack))
+                if (cycleExists(G, vertex, visited, inStack, stack))
                     return Optional.empty();
         }
 

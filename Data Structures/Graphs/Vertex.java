@@ -3,8 +3,7 @@ public record Vertex(String label) {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Vertex vertex = (Vertex) o;
-        return label.equals(vertex.label);
+        return label.equals(((Vertex) o).label);
     }
 
     @Override
