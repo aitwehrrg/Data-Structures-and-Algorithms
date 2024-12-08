@@ -15,8 +15,8 @@ public class DisjointSet {
     }
 
     public boolean union(Vertex u, Vertex v) {
-        Vertex rootU = parent.get(u);
-        Vertex rootV = parent.get(v);
+        Vertex rootU = find(u);
+        Vertex rootV = find(v);
 
         if (rootU.equals(rootV)) return false;
         
