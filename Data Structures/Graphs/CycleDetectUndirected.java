@@ -12,7 +12,7 @@ public class CycleDetectUndirected {
         while (!queue.isEmpty()) {
             Vertex current = queue.poll();
             for (Edge edge : G.getAdjacencyList().get(current)) {
-                Vertex neighbor = edge.dest();
+                Vertex neighbor = edge.v();
                 if (!visited.contains(neighbor)) {
                     visited.add(neighbor);
                     queue.offer(neighbor);

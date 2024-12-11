@@ -12,9 +12,10 @@ public class DFS {
             Vertex vertex = stack.pop();
             result.add(vertex);
             for (Edge edge : G.getAdjacencyList().get(vertex)) {
-                if (!visited.contains(edge.dest())) {
-                    stack.push(edge.dest());
-                    visited.add(edge.dest());
+                Vertex neighbor = edge.v();
+                if (!visited.contains(neighbor)) {
+                    stack.push(neighbor);
+                    visited.add(neighbor);
                 }
             }
         }

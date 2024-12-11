@@ -1,9 +1,10 @@
+package Graphs;
+
 import java.util.*;
 
 public class Graph {
     private final Map<Vertex, Set<Edge>> adjacencyList;
     private final Map<String, Vertex> vertices;
-
     private int V, E;
 
     public Graph() {
@@ -27,9 +28,15 @@ public class Graph {
         return adjacencyList.keySet();
     }
 
-    public Edge addEdge(Vertex u, Vertex v, int w) {
-        Edge edge = new Edge(u, v, w);
-        if (!adjacencyList.get(u).add(edge)) E++;
+    public Edge addEdge(Vertex u, Vertex v, boolean undirected) {
+        Edge edge = new Edge(u, v, undirected);
+        if (adjacencyList.get(u).add(edge)) E++;
+        return edge;
+    }
+
+    public Edge addEdge(Vertex u, Vertex v, int w, boolean undirected) {
+        Edge edge = new Edge(u, v, w, undirected);
+        if (adjacencyList.get(u).add(edge)) E++;
         return edge;
     }
 
@@ -54,9 +61,9 @@ public class Graph {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         for (Vertex vertex : getVertices())
-            sb.append(vertex).append(" : ").append(getAdjacencyList().get(vertex)).append("\n");
-        return sb.toString();
+            stringBuilder.append(vertex).append(" : ").append(getAdjacencyList().get(vertex)).append("\n");
+        return stringBuilder.toString();
     }
 }

@@ -12,9 +12,10 @@ public class BFS {
             Vertex vertex = queue.poll();
             result.add(vertex);
             for (Edge edge : G.getAdjacencyList().get(vertex)) {
-                if (!visited.contains(edge.dest())) {
-                    queue.offer(edge.dest());
-                    visited.add(edge.dest());
+                Vertex neighbor = edge.v();
+                if (!visited.contains(neighbor)) {
+                    queue.offer(neighbor);
+                    visited.add(neighbor);
                 }
             }
         }

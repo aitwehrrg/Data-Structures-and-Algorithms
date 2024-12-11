@@ -6,7 +6,7 @@ public class TopoSort {
         inStack.add(vertex);
 
         for (Edge edge : G.getAdjacencyList().get(vertex)) {
-            Vertex neighbor = edge.dest();
+            Vertex neighbor = edge.v();
             if (inStack.contains(neighbor)) return true;
             if (!visited.contains(neighbor))
                 if (cycleExists(G, neighbor, visited, inStack, stack))

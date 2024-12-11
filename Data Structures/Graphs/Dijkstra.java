@@ -10,19 +10,7 @@ public class Dijkstra {
         }
     }
 
-    public record Result(Map<Vertex, Integer> distances, Map<Vertex, List<Vertex>> paths) {
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (Vertex vertex : distances.keySet()) {
-                String dist = distances.get(vertex) < INF ? Integer.toString(distances.get(vertex)) : "INF";
-                sb.append(vertex).append(":\tDistance = ").append(dist).append(",\tPath = ").append(paths.get(vertex)).append("\n");
-            }
-            return sb.toString();
-        }
-    }
-
-    public static Result dijkstra(Graph G, Vertex src) {
+    public static Paths dijkstra(Graph G, Vertex src) {
         PriorityQueue<Pair> minHeap = new PriorityQueue<>(Comparator.comparingInt(Pair::distance));
         Map<Vertex, Integer> distances = new HashMap<>();
         Map<Vertex, Vertex> predecessors = new HashMap<>();
@@ -39,8 +27,8 @@ public class Dijkstra {
             visited.add(current);
 
             for (Edge edge : G.getAdjacencyList().get(current)) {
-                Vertex neighbor = edge.dest();
-                int newDist = distances.get(current) + edge.weight();
+                Vertex neighbor = edge.v();
+                int newDist = distances.get(current) + edge.w();
 
                 if (newDist < distances.get(neighbor)) {
                     distances.put(neighbor, newDist);
@@ -58,6 +46,6 @@ public class Dijkstra {
             paths.put(vertex, path);
         }
 
-        return new Result(distances, paths);
+        return new Paths(distances, paths);
     }
 }

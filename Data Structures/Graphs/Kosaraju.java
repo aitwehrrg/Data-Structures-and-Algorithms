@@ -4,7 +4,7 @@ public class Kosaraju {
     private static void dfs(Graph G, Vertex src, Set<Vertex> visited, Stack<Vertex> stack) {
         visited.add(src);
         for (Edge edge : G.getAdjacencyList().get(src)) {
-            Vertex neighbor = edge.dest();
+            Vertex neighbor = edge.v();
             if (!visited.contains(neighbor))
                 dfs(G, neighbor, visited, stack);
         }
@@ -15,20 +15,20 @@ public class Kosaraju {
         Graph H = new Graph();
         for (Vertex vertex : G.getVertices())
             for (Edge edge : G.getAdjacencyList().get(vertex)) {
-                Vertex u = edge.src(), v = edge.dest();
-                int w = edge.weight();
-                H.addEdge(H.addVertex(v.label()), H.addVertex(u.label()), w);
+                Vertex u = edge.u(), v = edge.v();
+                int w = edge.w();
+                H.addEdge(H.addVertex(v.label()), H.addVertex(u.label()), w, false);
             }
         return H;
     }
 
-    private static void collectSCC(Graph H, Vertex src, Set<Vertex> visited, Set<Vertex> component) {
+    private static void collectSCC(Graph G, Vertex src, Set<Vertex> visited, Set<Vertex> component) {
         visited.add(src);
         component.add(src);
-        for (Edge edge : H.getAdjacencyList().get(src)) {
-            Vertex neighbor = edge.dest();
+        for (Edge edge : G.getAdjacencyList().get(src)) {
+            Vertex neighbor = edge.v();
             if (!visited.contains(neighbor))
-                collectSCC(H, neighbor, visited, component);
+                collectSCC(G, neighbor, visited, component);
         }
     }
 
