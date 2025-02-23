@@ -16,14 +16,16 @@ public class Dijkstra {
         Map<Vertex, Vertex> predecessors = new HashMap<>();
         Set<Vertex> visited = new HashSet<>();
 
-        for (Vertex vertex : G.getVertices()) distances.put(vertex, INF);
+        for (Vertex vertex : G.getVertices())
+            distances.put(vertex, INF);
         distances.put(src, 0);
 
         minHeap.add(new Pair(src, 0));
         while (!minHeap.isEmpty()) {
             Vertex current = minHeap.poll().vertex;
 
-            if (visited.contains(current)) continue;
+            if (visited.contains(current))
+                continue;
             visited.add(current);
 
             for (Edge edge : G.getAdjacencyList().get(current)) {
@@ -41,7 +43,8 @@ public class Dijkstra {
         Map<Vertex, List<Vertex>> paths = new HashMap<>();
         for (Vertex vertex : G.getVertices()) {
             List<Vertex> path = new ArrayList<>();
-            for (Vertex at = vertex; at != null; at = predecessors.get(at)) path.add(at);
+            for (Vertex at = vertex; at != null; at = predecessors.get(at))
+                path.add(at);
             Collections.reverse(path);
             paths.put(vertex, path);
         }

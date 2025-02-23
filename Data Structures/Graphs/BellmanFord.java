@@ -7,11 +7,13 @@ public class BellmanFord {
         Map<Vertex, Integer> distances = new HashMap<>();
         Map<Vertex, Vertex> predecessors = new HashMap<>();
 
-        for (Vertex vertex : G.getAdjacencyList().keySet()) distances.put(vertex, INF);
+        for (Vertex vertex : G.getAdjacencyList().keySet())
+            distances.put(vertex, INF);
         distances.put(src, 0);
 
         Set<Edge> edges = new HashSet<>();
-        for (Vertex vertex : G.getVertices()) edges.addAll(G.getAdjacencyList().get(vertex));
+        for (Vertex vertex : G.getVertices())
+            edges.addAll(G.getAdjacencyList().get(vertex));
 
         for (int i = 0; i <= G.V(); i++) {
             for (Edge edge : edges) {
@@ -19,7 +21,8 @@ public class BellmanFord {
                 int w = edge.w();
 
                 if (distances.get(u) < INF && distances.get(u) + w < distances.get(v)) {
-                    if (i == G.V()) return Optional.empty();
+                    if (i == G.V())
+                        return Optional.empty();
                     distances.put(v, distances.get(u) + w);
                     predecessors.put(v, u);
                 }
@@ -29,7 +32,8 @@ public class BellmanFord {
         Map<Vertex, List<Vertex>> paths = new HashMap<>();
         for (Vertex vertex : G.getVertices()) {
             List<Vertex> path = new ArrayList<>();
-            for (Vertex at = vertex; at != null; at = predecessors.get(at)) path.add(at);
+            for (Vertex at = vertex; at != null; at = predecessors.get(at))
+                path.add(at);
             Collections.reverse(path);
             paths.put(vertex, path);
         }

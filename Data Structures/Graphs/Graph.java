@@ -1,5 +1,3 @@
-package Graphs;
-
 import java.util.*;
 
 public class Graph {
@@ -10,7 +8,8 @@ public class Graph {
     public Graph() {
         this.adjacencyList = new HashMap<>();
         this.vertices = new HashMap<>();
-        this.V = 0; this.E = 0;
+        this.V = 0;
+        this.E = 0;
     }
 
     public Vertex addVertex(String label) {
@@ -30,13 +29,15 @@ public class Graph {
 
     public Edge addEdge(Vertex u, Vertex v, boolean undirected) {
         Edge edge = new Edge(u, v, undirected);
-        if (adjacencyList.get(u).add(edge)) E++;
+        if (adjacencyList.get(u).add(edge))
+            E++;
         return edge;
     }
 
     public Edge addEdge(Vertex u, Vertex v, int w, boolean undirected) {
         Edge edge = new Edge(u, v, w, undirected);
-        if (adjacencyList.get(u).add(edge)) E++;
+        if (adjacencyList.get(u).add(edge))
+            E++;
         return edge;
     }
 
@@ -54,8 +55,10 @@ public class Graph {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         return adjacencyList.equals(((Graph) o).adjacencyList);
     }
 

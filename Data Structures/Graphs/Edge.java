@@ -18,7 +18,7 @@ public class Edge {
         this.v = v;
         this.w = w;
         this.unweighted = unweighted;
-        this.brackets = undirected ? new String[]{"{", "}"} : new String[]{"(", ")"};
+        this.brackets = undirected ? new String[] { "{", "}" } : new String[] { "(", ")" };
     }
 
     public Vertex u() {
@@ -35,8 +35,10 @@ public class Edge {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Edge edge = (Edge) o;
         return u.equals(edge.u) && v.equals(edge.v) && w == edge.w;
     }

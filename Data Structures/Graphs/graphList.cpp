@@ -1,16 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename T> struct Vertex {
+template <typename T>
+struct Vertex
+{
     T data;
-    Vertex(T data = T{}): data(data) {}
+    Vertex(T data = T{}) : data(data) {}
 };
 
-template <typename T> class Graph {
-    vector<Vertex<T>*> vertices;
+template <typename T>
+class Graph
+{
+    vector<Vertex<T> *> vertices;
     vector<list<unsigned int>> adjacencyList;
 
-    public:
+public:
     void addVertex(T);
     void removeVertex(unsigned int);
     bool exists(T) const;
@@ -23,14 +27,19 @@ template <typename T> class Graph {
     void display() const;
 };
 
-template <typename T> void Graph<T>::addVertex(T data) {
-    Vertex<T>* newVertex = new Vertex<T>(data);
+template <typename T>
+void Graph<T>::addVertex(T data)
+{
+    Vertex<T> *newVertex = new Vertex<T>(data);
     vertices.push_back(newVertex);
-    adjacencyList.resize(vertices.size());    
+    adjacencyList.resize(vertices.size());
 }
 
-template <typename T> void Graph<T>::removeVertex(unsigned int index) {
-    if (index >= vertices.size()) {
+template <typename T>
+void Graph<T>::removeVertex(unsigned int index)
+{
+    if (index >= vertices.size())
+    {
         cerr << "Vertex does not exist." << endl;
         return;
     }
@@ -39,35 +48,46 @@ template <typename T> void Graph<T>::removeVertex(unsigned int index) {
         removeEdge(i, index);
     adjacencyList.erase(adjacencyList.begin() + index);
 
-    Vertex<T>* temp = vertices[index];
+    Vertex<T> *temp = vertices[index];
     vertices.erase(vertices.begin() + index);
     delete temp;
 }
 
-template <typename T> bool Graph<T>::exists(T data) const {
-    for (Vertex<T>* vertex : vertices)
-        if (vertex -> data == data)
+template <typename T>
+bool Graph<T>::exists(T data) const
+{
+    for (Vertex<T> *vertex : vertices)
+        if (vertex->data == data)
             return true;
     return false;
 }
 
-template <typename T> void Graph<T>::addEdge(unsigned int src, unsigned int dest) {
+template <typename T>
+void Graph<T>::addEdge(unsigned int src, unsigned int dest)
+{
     if (!checkEdge(src, dest))
-        adjacencyList[src].push_back(dest);    
+        adjacencyList[src].push_back(dest);
 }
 
-template <typename T> void Graph<T>::removeEdge(unsigned int src, unsigned int dest) {
-    if (!checkEdge(src, dest)) return;
+template <typename T>
+void Graph<T>::removeEdge(unsigned int src, unsigned int dest)
+{
+    if (!checkEdge(src, dest))
+        return;
 
     for (unsigned int neighbor : adjacencyList[src])
-        if (neighbor == dest) {
+        if (neighbor == dest)
+        {
             adjacencyList[src].remove(index);
             return;
         }
 }
 
-template <typename T> bool Graph<T>::checkEdge(unsigned int src, unsigned int dest) const {
-    if (src >= vertices.size() || dest >= vertices.size()) {
+template <typename T>
+bool Graph<T>::checkEdge(unsigned int src, unsigned int dest) const
+{
+    if (src >= vertices.size() || dest >= vertices.size())
+    {
         cerr << "Vertex does not exist." << endl;
         return false;
     }
@@ -78,8 +98,11 @@ template <typename T> bool Graph<T>::checkEdge(unsigned int src, unsigned int de
     return false;
 }
 
-template <typename T> void Graph<T>::depthFirstSearch(unsigned int src) const {
-    if (src >= vertices.size()) {
+template <typename T>
+void Graph<T>::depthFirstSearch(unsigned int src) const
+{
+    if (src >= vertices.size())
+    {
         cerr << "Vertex does not exist." << endl;
         return;
     }
@@ -90,11 +113,14 @@ template <typename T> void Graph<T>::depthFirstSearch(unsigned int src) const {
     s.push(src);
     visited[src] = true;
 
-    while (!s.empty()) {
-        src = s.top(); s.pop();
-        cout << vertices[src] -> data << " -> ";
+    while (!s.empty())
+    {
+        src = s.top();
+        s.pop();
+        cout << vertices[src]->data << " -> ";
         for (unsigned int neighbor : adjacencyList[src])
-            if (!visited[neighbor]) {
+            if (!visited[neighbor])
+            {
                 s.push(neighbor);
                 visited[neighbor] = true;
             }
@@ -102,24 +128,30 @@ template <typename T> void Graph<T>::depthFirstSearch(unsigned int src) const {
     cout << "]" << endl;
 }
 
-template <typename T> void Graph<T>::breadthFirstSearch(unsigned int src) const {
-    if (src >= vertices.size()) {
+template <typename T>
+void Graph<T>::breadthFirstSearch(unsigned int src) const
+{
+    if (src >= vertices.size())
+    {
         cerr << "Vertex does not exist." << endl;
         return;
     }
 
     vector<bool> visited(vertices.size());
     cout << "[";
-    
+
     queue<unsigned int> q;
     q.push(src);
     visited[src] = true;
 
-    while (!q.empty()) {
-        src = q.front(); q.pop();
-        cout << vertices[src] -> data << " -> ";
+    while (!q.empty())
+    {
+        src = q.front();
+        q.pop();
+        cout << vertices[src]->data << " -> ";
         for (unsigned int neighbor : adjacencyList[src])
-            if (!visited[neighbor]) {
+            if (!visited[neighbor])
+            {
                 q.push(neighbor);
                 visited[neighbor] = true;
             }
@@ -127,18 +159,23 @@ template <typename T> void Graph<T>::breadthFirstSearch(unsigned int src) const 
     cout << "]" << endl;
 }
 
-template <typename T> inline bool Graph<T>::isEmpty() const { return !vertices.size(); }
+template <typename T>
+inline bool Graph<T>::isEmpty() const { return !vertices.size(); }
 
-template <typename T> void Graph<T>::display() const {
-    if (isEmpty()) {
+template <typename T>
+void Graph<T>::display() const
+{
+    if (isEmpty())
+    {
         cerr << "Graph is empty." << endl;
         return;
     }
 
-    for (int i = 0; i < vertices.size(); i++) {
-        cout << vertices[i] -> data << " -> ";
+    for (int i = 0; i < vertices.size(); i++)
+    {
+        cout << vertices[i]->data << " -> ";
         for (unsigned int neighbor : adjacencyList[i])
-            cout << vertices[neighbor] -> data << " -> ";
+            cout << vertices[neighbor]->data << " -> ";
         cout << endl;
     }
 }

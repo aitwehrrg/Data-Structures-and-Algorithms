@@ -1,19 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename K, typename V> struct Entry {
-    K key; V value;
-    Entry(K key = K{}, V value = V{}): key(key), value(value) {}
+template <typename K, typename V>
+struct Entry
+{
+    K key;
+    V value;
+    Entry(K key = K{}, V value = V{}) : key(key), value(value) {}
 };
 
-template <typename K, typename V, unsigned int MAX> class HashMap {
+template <typename K, typename V, unsigned int MAX>
+class HashMap
+{
     vector<K> keys;
-    list<Entry<K, V>*> dictionary[MAX];
+    list<Entry<K, V> *> dictionary[MAX];
     unsigned int prime;
     unsigned int hash(K key) const;
 
-    public:
-    HashMap(): prime(1000000007) {} // Pick your favorite prime number
+public:
+    HashMap() : prime(1000000007) {} // Pick your favorite prime number
     void insert(K key, V value);
     void remove(K key);
     void update(K key, V value);
@@ -23,19 +28,25 @@ template <typename K, typename V, unsigned int MAX> class HashMap {
     void display() const;
 };
 
-template <typename K, typename V, unsigned int MAX> unsigned int HashMap<K, V, MAX>::hash(K key) const {
+template <typename K, typename V, unsigned int MAX>
+unsigned int HashMap<K, V, MAX>::hash(K key) const
+{
     string s = to_string(key);
-    
+
     unsigned int hash = 0;
-    for (char c : s) hash += c * prime;
+    for (char c : s)
+        hash += c * prime;
     hash %= MAX;
 
     return hash;
 }
 
-template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::insert(K key, V value) {
+template <typename K, typename V, unsigned int MAX>
+void HashMap<K, V, MAX>::insert(K key, V value)
+{
     unsigned int index = hash(key);
-    if (exists(key)) {
+    if (exists(key))
+    {
         cerr << "Key already exists." << endl;
         return;
     }
@@ -43,10 +54,13 @@ template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::ins
     dictionary[index].push_back(new Entry(key, value));
 }
 
-template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::remove(K key) {
+template <typename K, typename V, unsigned int MAX>
+void HashMap<K, V, MAX>::remove(K key)
+{
     unsigned int index = hash(key);
-    for (Entry<K, V>* entry : dictionary[index])
-        if (entry -> key == key) {
+    for (Entry<K, V> *entry : dictionary[index])
+        if (entry->key == key)
+        {
             keys.erase(find(keys.begin(), keys.end(), key));
             dictionary[index].remove(entry);
             delete entry;
@@ -55,36 +69,47 @@ template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::rem
     cerr << "Key not found." << endl;
 }
 
-template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::update(K key, V value) {
+template <typename K, typename V, unsigned int MAX>
+void HashMap<K, V, MAX>::update(K key, V value)
+{
     unsigned int index = hash(key);
-    for (Entry<K, V>* entry : dictionary[index])
-        if (entry -> key == key) {
-            entry -> value = value;
+    for (Entry<K, V> *entry : dictionary[index])
+        if (entry->key == key)
+        {
+            entry->value = value;
             return;
-        }    
-    cerr << "Key not found." << endl;    
+        }
+    cerr << "Key not found." << endl;
 }
 
-template <typename K, typename V, unsigned int MAX> V HashMap<K, V, MAX>::lookup(K key) const {
+template <typename K, typename V, unsigned int MAX>
+V HashMap<K, V, MAX>::lookup(K key) const
+{
     unsigned int index = hash(key);
-    for (Entry<K, V>* entry : dictionary[index])
-        if (entry -> key == key)
-            return entry -> value;
+    for (Entry<K, V> *entry : dictionary[index])
+        if (entry->key == key)
+            return entry->value;
     cerr << "Key not found." << endl;
     return V{};
 }
 
-template <typename K, typename V, unsigned int MAX> bool HashMap<K, V, MAX>::exists(K key) const {
+template <typename K, typename V, unsigned int MAX>
+bool HashMap<K, V, MAX>::exists(K key) const
+{
     for (K i : keys)
         if (i == key)
             return true;
     return false;
 }
 
-template <typename K, typename V, unsigned int MAX> inline bool HashMap<K, V, MAX>::isEmpty() const { return keys.empty(); }
+template <typename K, typename V, unsigned int MAX>
+inline bool HashMap<K, V, MAX>::isEmpty() const { return keys.empty(); }
 
-template <typename K, typename V, unsigned int MAX> void HashMap<K, V, MAX>::display() const {
-    if (isEmpty()) {
+template <typename K, typename V, unsigned int MAX>
+void HashMap<K, V, MAX>::display() const
+{
+    if (isEmpty())
+    {
         cerr << "Hash Map is empty." << endl;
         return;
     }

@@ -13,7 +13,8 @@ public class Prim {
         minHeap.addAll(G.getAdjacencyList().get(start));
         while (!minHeap.isEmpty()) {
             Edge edge = minHeap.poll();
-            if (visited.contains(edge.v())) continue;
+            if (visited.contains(edge.v()))
+                continue;
 
             mst.add(edge);
             weight += edge.w();

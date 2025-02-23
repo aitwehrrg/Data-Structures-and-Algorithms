@@ -17,7 +17,8 @@ public class CycleDetectUndirected {
                     visited.add(neighbor);
                     queue.offer(neighbor);
                     parent.put(neighbor, current);
-                } else if (!neighbor.equals(parent.get(current))) return true;
+                } else if (!neighbor.equals(parent.get(current)))
+                    return true;
             }
         }
         return false;

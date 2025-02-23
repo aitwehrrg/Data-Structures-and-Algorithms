@@ -1,13 +1,15 @@
 import java.util.*;
 
 public class TopoSort {
-    private static boolean cycleExists(Graph G, Vertex vertex, Set<Vertex> visited, Set<Vertex> inStack, Stack<Vertex> stack) {
+    private static boolean cycleExists(Graph G, Vertex vertex, Set<Vertex> visited, Set<Vertex> inStack,
+            Stack<Vertex> stack) {
         visited.add(vertex);
         inStack.add(vertex);
 
         for (Edge edge : G.getAdjacencyList().get(vertex)) {
             Vertex neighbor = edge.v();
-            if (inStack.contains(neighbor)) return true;
+            if (inStack.contains(neighbor))
+                return true;
             if (!visited.contains(neighbor))
                 if (cycleExists(G, neighbor, visited, inStack, stack))
                     return true;

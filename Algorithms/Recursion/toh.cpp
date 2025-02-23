@@ -1,8 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename T> void toh(unsigned int n, T start, T end, T other) {
-    if (n == 1) {
+template <typename T>
+void toh(unsigned int n, T start, T end, T other)
+{
+    if (n == 1)
+    {
         cout << "Move disk 1 from peg " << start << " to " << end << endl;
         return;
     }

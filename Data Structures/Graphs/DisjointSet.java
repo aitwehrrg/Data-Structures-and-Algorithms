@@ -18,8 +18,9 @@ public class DisjointSet {
         Vertex rootU = find(u);
         Vertex rootV = find(v);
 
-        if (rootU.equals(rootV)) return false;
-        
+        if (rootU.equals(rootV))
+            return false;
+
         if (rank.get(rootU) > rank.get(rootV))
             parent.put(rootV, rootU);
         else if (rank.get(rootU) < rank.get(rootV))
@@ -32,7 +33,8 @@ public class DisjointSet {
     }
 
     public Vertex find(Vertex u) {
-        if (!parent.get(u).equals(u)) parent.put(u, find(parent.get(u)));
+        if (!parent.get(u).equals(u))
+            parent.put(u, find(parent.get(u)));
         return parent.get(u);
     }
 

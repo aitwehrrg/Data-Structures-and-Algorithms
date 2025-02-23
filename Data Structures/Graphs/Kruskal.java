@@ -7,7 +7,8 @@ public class Kruskal {
         DisjointSet disjointSet = new DisjointSet(G);
 
         List<Edge> edges = new ArrayList<>();
-        for (Vertex vertex : G.getVertices()) edges.addAll(G.getAdjacencyList().get(vertex));
+        for (Vertex vertex : G.getVertices())
+            edges.addAll(G.getAdjacencyList().get(vertex));
         edges.sort(Comparator.comparingInt(Edge::w));
 
         for (Edge edge : edges) {

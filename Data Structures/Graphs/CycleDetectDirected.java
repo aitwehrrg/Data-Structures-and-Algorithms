@@ -7,7 +7,8 @@ public class CycleDetectDirected {
 
         for (Edge edge : G.getAdjacencyList().get(vertex)) {
             Vertex neighbor = edge.v();
-            if (inStack.contains(neighbor)) return true;
+            if (inStack.contains(neighbor))
+                return true;
             if (!visited.contains(neighbor))
                 if (cycleExistsHelper(G, neighbor, visited, inStack))
                     return true;

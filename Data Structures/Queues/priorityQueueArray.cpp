@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename T, unsigned int MAX> class PriorityQueue {
+template <typename T, unsigned int MAX>
+class PriorityQueue
+{
     unsigned int front, rear;
     unsigned int sizeVar;
     T queue[MAX];
@@ -9,8 +11,8 @@ template <typename T, unsigned int MAX> class PriorityQueue {
     bool reverse;
     void insert(T data, unsigned int index);
 
-    public:
-    PriorityQueue(bool reverse = false): front(0), rear(MAX - 1), sizeVar(0), reverse(reverse) {};
+public:
+    PriorityQueue(bool reverse = false) : front(0), rear(MAX - 1), sizeVar(0), reverse(reverse){};
     bool enqueue(T);
     T dequeue();
     T peek() const;
@@ -20,20 +22,27 @@ template <typename T, unsigned int MAX> class PriorityQueue {
     void display() const;
 };
 
-template <typename T, unsigned int MAX> void PriorityQueue<T, MAX>::insert(T data, unsigned int index) {
+template <typename T, unsigned int MAX>
+void PriorityQueue<T, MAX>::insert(T data, unsigned int index)
+{
     for (int i = sizeVar - 1; i > index; i--)
         queue[inc(front, i)] = queue[inc(front, i - 1)];
     queue[inc(front, index)] = data;
 }
 
-template <typename T, unsigned int MAX> inline unsigned int PriorityQueue<T, MAX>::inc(int x, int increment) const { return (x + increment) % MAX; }
+template <typename T, unsigned int MAX>
+inline unsigned int PriorityQueue<T, MAX>::inc(int x, int increment) const { return (x + increment) % MAX; }
 
-template <typename T, unsigned int MAX> bool PriorityQueue<T, MAX>::enqueue(T data) {
-    if (isFull()) {
+template <typename T, unsigned int MAX>
+bool PriorityQueue<T, MAX>::enqueue(T data)
+{
+    if (isFull())
+    {
         cerr << "Queue Overflow." << endl;
         return false;
     }
-    rear = inc(rear); sizeVar++;
+    rear = inc(rear);
+    sizeVar++;
 
     int i = 0;
     while (i < size() - 1 && ((!reverse && queue[inc(front, i)] > data) || (reverse && queue[inc(front, i)] < data)))
@@ -42,9 +51,13 @@ template <typename T, unsigned int MAX> bool PriorityQueue<T, MAX>::enqueue(T da
     return true;
 }
 
-template <typename T, unsigned int MAX> T PriorityQueue<T, MAX>::dequeue() {
-    if (!isEmpty()) {
-        front = inc(front); sizeVar--;
+template <typename T, unsigned int MAX>
+T PriorityQueue<T, MAX>::dequeue()
+{
+    if (!isEmpty())
+    {
+        front = inc(front);
+        sizeVar--;
         return queue[inc(front, -1)];
     }
 
@@ -52,21 +65,29 @@ template <typename T, unsigned int MAX> T PriorityQueue<T, MAX>::dequeue() {
     return T{};
 }
 
-template <typename T, unsigned int MAX> T PriorityQueue<T, MAX>::peek() const {
+template <typename T, unsigned int MAX>
+T PriorityQueue<T, MAX>::peek() const
+{
     if (!isEmpty())
         return queue[front];
     cerr << "Queue Underflow." << endl;
     return T{};
 }
 
-template <typename T, unsigned int MAX> inline unsigned int PriorityQueue<T, MAX>::size() const { return sizeVar; }
+template <typename T, unsigned int MAX>
+inline unsigned int PriorityQueue<T, MAX>::size() const { return sizeVar; }
 
-template <typename T, unsigned int MAX> inline bool PriorityQueue<T, MAX>::isEmpty() const { return !size(); }
+template <typename T, unsigned int MAX>
+inline bool PriorityQueue<T, MAX>::isEmpty() const { return !size(); }
 
-template <typename T, unsigned int MAX> inline bool PriorityQueue<T, MAX>::isFull() const { return size() == MAX; }
+template <typename T, unsigned int MAX>
+inline bool PriorityQueue<T, MAX>::isFull() const { return size() == MAX; }
 
-template <typename T, unsigned int MAX> void PriorityQueue<T, MAX>::display() const {
-    if (isEmpty()) {
+template <typename T, unsigned int MAX>
+void PriorityQueue<T, MAX>::display() const
+{
+    if (isEmpty())
+    {
         cerr << "Queue Underflow." << endl;
         return;
     }

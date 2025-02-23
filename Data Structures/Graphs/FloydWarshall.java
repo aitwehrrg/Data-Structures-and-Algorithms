@@ -4,10 +4,12 @@ public class FloydWarshall {
     private static final int INF = Integer.MAX_VALUE;
 
     private static int[][] deepCopy(int[][] original) {
-        if (original == null) return null;
+        if (original == null)
+            return null;
         int n = original.length;
         int[][] copy = new int[n][];
-        for (int i = 0; i < n; i++) copy[i] = Arrays.copyOf(original[i], n);
+        for (int i = 0; i < n; i++)
+            copy[i] = Arrays.copyOf(original[i], n);
         return copy;
     }
 

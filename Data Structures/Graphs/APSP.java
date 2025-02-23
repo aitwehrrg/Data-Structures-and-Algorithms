@@ -4,10 +4,12 @@ public class APSP {
     private static final int INF = Integer.MAX_VALUE;
 
     private static int[][] deepCopy(int[][] original) {
-        if (original == null) return null;
+        if (original == null)
+            return null;
         int n = original.length;
         int[][] copy = new int[n][];
-        for (int i = 0; i < n; i++) copy[i] = Arrays.copyOf(original[i], n);
+        for (int i = 0; i < n; i++)
+            copy[i] = Arrays.copyOf(original[i], n);
         return copy;
     }
 
@@ -32,7 +34,8 @@ public class APSP {
             W[i][i] = INF;
         }
 
-        for (int m = 0; m < n - 1; m++) extendShortestPaths(D, W);
+        for (int m = 0; m < n - 1; m++)
+            extendShortestPaths(D, W);
         return D;
     }
 }
